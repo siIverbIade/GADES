@@ -1,0 +1,19 @@
+h4 {
+    height: 100%;
+    color: #ff0000;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+h6 {
+    height: 100%;
+    color: #FF0004;
+
+    h5 {
+        height: 100%;
+        color: #000000;
+        font-weight: bold;
+    }
+}

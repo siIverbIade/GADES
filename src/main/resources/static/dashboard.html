@@ -1,0 +1,253 @@
+<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+</style>
+<meta charset="utf-8">
+<div id="wrapper">
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+		<!-- Main Content -->
+		<div id="content">
+			<!-- Topbar -->
+			<!-- End of Topbar -->
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<!-- Page Heading -->
+				<h1 class="h3 mb-2 text-gray-800">Estatísticas</h1>
+				<p class="mb-4">
+					Em uma nota mais positiva, as estatísticas a seguir servem como um
+					vislumbre de esperança para o nosso sistema educacional, desde o
+					aumento das taxas de conclusão do ensino fundamental até aumentos
+					no crescimento educacional. Por favor, visite a <a target="_blank"
+						href="https://www.qedu.org.br/cidade/2763-itaguai/aprendizado">Página
+						oficial QEDU - Use dados, e transforme a educação</a>.
+				</p>
+				<!-- Content Row -->
+				<div class="row">
+					<div class="col-xl-8 col-lg-7">
+						<!-- Area Chart -->
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Area&nbsp;</h6>
+							</div>
+							<div class="card-body">
+								<div class="chart-area">
+									<canvas id="myBarChart"></canvas>
+								</div>
+								<hr>
+								Styling for the area chart can be found in the
+								<code>/js/demo/chart-area-demo.js</code>
+								file.
+							</div>
+						</div>
+						<!-- Bar Chart -->
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Bar</h6>
+							</div>
+							<div class="card-body">
+								<div class="chart-bar">
+									<canvas id="myAreaChart"></canvas>
+
+								</div>
+								<hr>
+								Styling for the bar chart can be found in the
+								<code>/js/demo/chart-bar-demo.js</code>
+								file.
+							</div>
+						</div>
+					</div>
+					<!-- Donut Chart -->
+					<div class="col-xl-4 col-lg-5">
+						<div class="card shadow mb-4">
+							<!-- Card Header - Dropdown -->
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Donut&nbsp;</h6>
+							</div>
+							<!-- Card Body -->
+							<div class="card-body">
+								<div class="chart-pie pt-4">
+									<canvas id="myPieChart"></canvas>
+								</div>
+								<hr>
+								Styling for the donut chart can be found in the
+								<code>/js/demo/chart-pie-demo.js</code>
+								file.
+							</div>
+						</div>
+					</div>
+
+					<!-- Teste Chart -->
+					<div class="col-xl-4 col-lg-5">
+						<div class="card shadow mb-4">
+							<!-- Teste Header - Dropdown -->
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Teste</h6>
+							</div>
+							<!-- Teste Body -->
+							<div class="card-body">
+								<canvas id="myChart"></canvas>
+
+								<hr>
+								Styling for the donut chart can be found in the
+								<code>/js/demo/chart-pie-demo.js</code>
+								file.
+							</div>
+						</div>
+					</div>
+					
+					<!-- Novo Chart -->
+					<div class="col-xl-4 col-lg-5">
+						<div class="card shadow mb-4">
+							<!-- Novo Header - Dropdown -->
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">Novo</h6>
+							</div>
+							<!-- Novo Body -->
+							<div class="card-body">
+								<canvas id="canvas"></canvas>
+								<button id="randomizeData">Randomize Data</button>
+								<hr>
+								Styling for the donut chart can be found in the
+								<code>/js/demo/chart-pie-demo.js</code>
+								file.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- End of Main Content -->
+		<!-- Footer -->
+		<!-- End of Footer -->
+	</div>
+	<!-- End of Content Wrapper -->
+</div>
+<!--<script src="//www.google-analytics.com/analytics.js"></script> -->
+<!-- End of Page Wrapper -->
+<!-- Logout Modal-->
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+<!-- Page level plugins -->
+<script src="vendor/Chart.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<script src="js/demo/chart-bar-demo.js"></script>
+	<script>
+		var chartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				type: 'line',
+				label: 'Dataset 1',
+				borderColor: window.chartColors.blue,
+				borderWidth: 2,
+				fill: false,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				type: 'bar',
+				label: 'Dataset 2',
+				backgroundColor: window.chartColors.red,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				],
+				borderColor: 'white',
+				borderWidth: 2
+			}, {
+				type: 'bar',
+				label: 'Dataset 3',
+				backgroundColor: window.chartColors.green,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myMixedChart = new Chart(ctx, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: 'Chart.js Combo Bar Line Chart'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: true
+					}
+				}
+			});
+		};
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			chartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+			});
+			window.myMixedChart.update();
+		});
+	</script>
+<script>
+	var ctx = document.getElementById('myChart');
+	var myChart = new Chart(ctx, {
+		type : 'bar',
+		data : {
+			labels : [ 'Creche', 'Pré Escolar', ' Anos Iniciais', 'Anos Finais', 'E.J.A.', 'Outros' ],
+			datasets : [ {
+				label : 'Total de Turmas',
+				data : [ 12, 19, 3, 5, 2, 3 ],
+				backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+						'rgba(42, 133, 237, 0.2)', 'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)' ],
+				borderColor : [ 'rgba(255, 99, 132, 1)',
+						'rgba(42, 133, 237, 1)', 'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
+				borderWidth : 1
+			} ]
+		},
+		options : {
+			scales : {
+				yAxes : [ {
+					ticks : {
+						beginAtZero : true
+					}
+				} ]
+			}
+		}
+	});
+</script>

@@ -1,0 +1,156 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<h1 class="h3 mb-2 text-gray-800">Dados da Unidade Escolar</h1>
+
+<form class="form col-md-12" th:action="@{/dln/escola}"
+	th:object="${Escola}" id="instituicao-form" method="post"
+	autocomplete="off" xmlns:th="http://www.thymeleaf.org">
+	
+	<div class="form-row">
+		<div class="form-group col-md-3">
+			<label for="inputCity">INEP</label>
+			<div class="input-group">
+				<div class="input-group-append">
+					<input id="inep" list="browsers" th:field="*{inep}" type="text"
+						class="form-control" placeholder="INEP">
+					<button id="setinepconfig" class="btn btn-primary" type="button">
+						<i class="fas fa-search fa-sm"></i>
+					</button>
+					<datalist id="browsers">
+						<option th:each="e : ${Escolas}" th:text="${e.nome}"
+						th:value="${e.inep}">
+					</datalist>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="escfields" hidden="true">
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="inputEmail4">Nome</label> <input th:field="*{nome}"
+					type="text" class="form-control" placeholder="Nome">
+			</div>
+			<div class="form-group col-md-3">
+				<label for="inputAddress2">CNPJ</label> <input th:field="*{cnpj}"
+					type="text" class="form-control" placeholder="CNPJ">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-3">
+					<label for="inputAddress2">CEP</label>
+					<div class="input-group-append">
+						
+						<input id="cep" th:field="*{cep}" type="text" class="form-control"
+							placeholder="CEP">
+						<button id="findcep" class="btn btn-primary" type="button">
+							<i class="fas fa-search fa-sm"></i>
+						</button>
+					</div>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-5">
+				<label for="inputCity">Logradouro</label><input id="rua"
+					th:field="*{logradouro}" type="text" class="form-control"
+					placeholder="Endereço">
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="inputCity">Número</label><input th:field="*{numero}"
+					type="text" class="form-control" placeholder="Endereço">
+			</div>
+			<div class="form-group col-md-4">
+				<label for="inputCity">Complemento</label><input id="complemento"
+					th:field="*{complemento}" type="text" class="form-control"
+					placeholder="Complemento">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-5">
+				<label for="inputPassword4">Bairro</label> <input id="bairro"
+					th:field="*{bairro}" type="text" class="form-control"
+					placeholder="Bairro">
+			</div>
+			<div class="form-group col-md-2">
+				<label for="inputCity">UF</label> <select id="uf" th:field="*{ufId}"
+					class="form-control" data-role="select">
+					<option value="">Selecione a UF</option>
+					<option th:each="e : ${Estados}" th:text="${e.sigla}"
+						th:value="${e.id}"></option>
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				
+				<label for="exampleInputEmail1">Cidade</label> <select id="ibge"
+					class="form-control" data-role="select" th:field="*{localidadeId}">
+					<option value="">Selecione o município</option>
+					<option th:each="m : ${Municipios}" th:text="${m.nome}"
+						th:value="${m.id}" th:name="${m.cod}"></option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="inputCity">Organização</label> <select disabled
+					id="selorg" th:field="*{organizacaoId}" class="form-control"
+					data-role="select">
+					<option value="">Selecione a Organização</option>
+					<option th:each="o : ${Organizacoes}" th:text="${o.nome}"
+						th:value="${o.id}"></option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-md-4">
+				<label for="inputCity">Telefone Principal </label> <input
+					th:field="*{telefones[0]}" type="text" class="form-control"
+					placeholder="Telefone 1">
+			</div>
+
+			<div class="form-group col-md-3">
+				<label for="inputCity">Telefone Secundário </label> <input
+					th:field="*{telefones[1]}" type="text" class="form-control"
+					placeholder="Telefone 2">
+			</div>
+
+			<div class="form-group col-md-3">
+				<label for="inputAddress">Celular</label> <input
+					th:field="*{celular}" type="text" class="form-control"
+					placeholder="Celular">
+
+			</div>
+
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-5">
+				<label for="inputCity">Diretor</label> <select
+					th:field="*{diretorId}" id="seldir" class="form-control"
+					data-role="select">
+					<option value="">Selecione o funcionário</option>
+					<option th:each="o : ${Diretores}"
+						th:text="${o.funcionario.nome}+' - Matr.: '+${o.matricula}"
+						th:value="${o.id}"></option>
+				</select>
+			</div>
+			<div class="form-group col-md-5">
+				<label for="inputCity">Secretário Escolar</label> <select
+					th:field="*{secretarioId}" id="selsec" class="form-control"
+					data-role="select">
+					<option value="">Não Possui Secretário</option>
+					<option th:each="s : ${Secretarios}"
+						th:text="${s.funcionario.nome}+' - Matr.: '+${s.matricula}"
+						th:value="${s.id}"></option>
+				</select>
+			</div>
+		</div>
+		<!--  type="submit" -->
+		<input id="submit-form" class="btn btn-primary" type="button"
+			value="Salvar" />
+		<div class="form-group col-md-2"></div>
+	</div>
+</form>
+<script type="text/javascript" src="../js/system/escola.js"></script>
+<script type="text/javascript" src="../js/system/lib/apicep.js"></script>

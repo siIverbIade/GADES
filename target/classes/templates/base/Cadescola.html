@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="active accordion">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>SB Admin 2 - Register</title>
+        <!-- Custom fonts for this template-->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="components/pg.blocks/css/blocks.css">
+        <link rel="stylesheet" href="components/pg.blocks/css/plugins.css">
+        <link rel="stylesheet" href="components/pg.blocks/css/style-library-1.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    </head>
+    <body class="bg-gradient-primary">
+        <div class="container" style="padding: -0 0 0; margin: -0, 0 0; top: -0; right: 0; bottom: 0; left: 0; border-top: 0 solid; border-left: 0 solid; border-right: -0 solid; border-style: solid; border-bottom: 0 solid;"> 
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
+        </div>
+        <div id="background">
+            <div class="row">
+                <div id="contentBackground" class="col">
+                    <div id="contentContainer" class="controlFontSize active accordion form-group p-5 row address-bold-line alert-dismissible alert-link alert-success border-danger" style="overflow: hidden; font-size: 18px; margin: -35px; top: 103px; bottom: 103px; left: 103px; right: 103px; padding: -70px;"> 
+                        <div id="messageContainer"></div>
+                        <div class="divLogoRenderBig"> </div>
+                        <link href="file://192.168.10.22/sesmec/dashboard%202019/ideb/renderscript/Ideb/css/style" media="screen" rel="stylesheet" type="text/css">
+                        <script defer="" src="file://192.168.10.22/sesmec/dashboard%202019/ideb/renderscript/Ideb/js/search-result"></script>
+                        <div class="titleApplication accordion text-black-50">
+                            <br> 
+                            <h3><b> Cadastro de escola</b></h3>
+                            <br>
+                        </div>
+                        <br>
+                        <div class="divRender"> 
+                            <script>var jsonGlobalFilterMessageRequired = [];</script>
+                            <form method="post" name="frm" class="classForm" id="frm">
+                                <label for="pkCodEntidade">&nbsp; Inep</label>
+                                <div class="divRequired"></div>
+                                <input name="pkCodEntidade" id="pkCodEntidade" placeholder="Código da Escola" title="Por Código" class="onlynumbers accordion align-content-around form-group" maxlength="8" tabindex="15" type="text" value="">
+                                <hr>
+                                <label id="lbl" class="align-content-center align-content-end align-content-lg-around">Por área de interesse</label>
+                                <div id="lblDivRequired" class="divRequired" style="display: ;"></div>
+                                <select name="pkCodEstado" id="pkCodEstado" tabindex="16">
+                                    <option value="">UF</option>
+                                    <option value="12">ACRE</option>
+                                    <option value="27">ALAGOAS</option>
+                                    <option value="16">AMAPÁ</option>
+                                    <option value="13">AMAZONAS</option>
+                                    <option value="29">BAHIA</option>
+                                    <option value="23">CEARÁ</option>
+                                    <option value="53">DISTRITO FEDERAL</option>
+                                    <option value="32">ESPÍRITO SANTO</option>
+                                    <option value="52">GOIÁS</option>
+                                    <option value="21">MARANHÃO</option>
+                                    <option value="51">MATO GROSSO</option>
+                                    <option value="50">MATO GROSSO DO SUL</option>
+                                    <option value="31">MINAS GERAIS</option>
+                                    <option value="15">PARÁ</option>
+                                    <option value="25">PARAÍBA</option>
+                                    <option value="41">PARANÁ</option>
+                                    <option value="26">PERNAMBUCO</option>
+                                    <option value="22">PIAUÍ</option>
+                                    <option value="33">RIO DE JANEIRO</option>
+                                    <option value="24">RIO GRANDE DO NORTE</option>
+                                    <option value="43">RIO GRANDE DO SUL</option>
+                                    <option value="11">RONDÔNIA</option>
+                                    <option value="14">RORAIMA</option>
+                                    <option value="42">SANTA CATARINA</option>
+                                    <option value="35">SÃO PAULO</option>
+                                    <option value="28">SERGIPE</option>
+                                    <option value="17">TOCANTINS</option>
+                                </select>
+                                <select name="pkCodMunicipio" id="pkCodMunicipio" tabindex="17">
+                                    <option value="">Municípios</option>
+                                </select>
+                                <select name="idDependenciaAdm" id="idDependenciaAdm" tabindex="18">
+                                    <option value="">Dependência Administrativa</option>
+                                    <option value="1">Federal</option>
+                                    <option value="2">Estadual</option>
+                                    <option value="3">Municipal</option>
+                                    <option value="4">Privada</option>
+                                </select>
+                                <select name="noZona" id="noZona" tabindex="19">
+                                    <option value="">Localização</option>
+                                    <option value="1">Urbana</option>
+                                    <option value="2">Rural</option>
+                                </select>
+                                <select name="idLocalizacaoDiferenciada" id="idLocalizacaoDiferenciada" tabindex="20">
+                                    <option value="">Localização Diferenciada</option>
+                                    <option value="0">Não se aplica</option>
+                                    <option value="2">Terra indígena</option>
+                                    <option value="4">Unidade de uso sustentável</option>
+                                    <option value="5">Unidade de uso sustentável em terra indígena</option>
+                                    <option value="6">Unidade de uso sustentável em área remanescente de quilombos</option>
+                                    <option value="1">Área de assentamento</option>
+                                    <option value="3">Área remanescente de quilombos</option>
+                                </select>
+                                <select name="codigoEscola" id="codigoEscola" tabindex="21">
+                                    <option value="">Escola</option>
+                                </select>
+                                <input name="noEntidade" id="noEntidade" placeholder="Nome da escola" maxlength="50" tabindex="22" type="text" value="">
+                                <div>
+                                    <button name="btnSearch" class="btnDefault btn btn-warning align-content-lg-around align-content-end align-content-center align-content-around form-group" title="Buscar" type="submit" id="btnSearch" onclick="void(0);">Buscar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <br> 
+                    </div>                     
+                </div>
+            </div>
+            <div id="footerBackground"> 
+                <footer> 
+                    <div style="text-align: center;">
+                        <div class="no-print" style=""> 
+</div>
+                    </div>                     
+                </footer>                 
+                <div class="appVersion no-print"></div>                 
+            </div>
+        </div>
+        <script type="text/javascript" src="components/pg.blocks/js/plugins.js"></script>
+        <script type="text/javascript" src="components/pg.blocks/js/bskit-scripts.js"></script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
+    </body>
+</html>

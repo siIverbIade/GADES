@@ -1,0 +1,95 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="card shadow mb-4">
+	<div
+		class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">Cadastro de Usuário</h6>
+		<div class="dropdown no-arrow">
+			<a class="dropdown-toggle" href="#" onclick="return false;"
+				role="button" id="dropdownMenuLink" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false"> <i
+				class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+			</a>
+			<div
+				class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+				aria-labelledby="dropdownMenuLink">
+				<div class="dropdown-header">Dropdown Header:</div>
+				<a class="dropdown-item" href="#" onclick="return false;">Action</a>
+				<a class="dropdown-item" href="#" onclick="return false;">Another
+					action</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" onclick="return false;">Something
+					else here</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<h3>
+			<small id="emailHelp" class="form-text text-muted">Usuário</small>
+		</h3>
+		<form id="cad_usu_form" th:action="@{../usuario/salvarUsuario}"
+			th:object="${usuarioModel}" method="post"
+			xmlns:th="http://www.thymeleaf.org">
+			<div th:if="${msg_resultado}">
+				<script type="text/javascript" th:inline="javascript">
+				var msg = [[${msg_resultado}]];
+				alert(msg);
+			</script>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Funcionário</label> <select
+					id="selfuncionario" class="form-control" data-role="select"
+					th:field="*{funcionarioId}">
+					<option value="">Selecione o funcionário</option>
+					<option th:each="f : ${funcionarios}" th:value="${f.id}"
+						th:text="${f.funcionario.nome}"></option>
+				</select>
+				<p style="color: red;" th:if="${#fields.hasErrors('funcionarioId')}"
+					th:errors="*{funcionarioId}" class="erro-msg">...</p>
+			</div>
+
+			<div class="form-group">
+				<label for="exampleInputEmail1">Login</label> <input disabled
+					th:field="*{login}" type="text" class="form-control w-100"
+					id="inputlogin" aria-describedby="emailHelp" placeholder="Login"
+					name="Login">
+				<p style="color: red;" th:if="${#fields.hasErrors('login')}"
+					th:errors="*{login}" class="erro-msg">...</p>
+			</div>
+
+			<div class="form-group">
+				<label for="exampleInputPassword1">Senha</label> <input disabled
+					th:field="*{senha}" type="password" class="form-control w-100"
+					id="inputsenha" placeholder="Senha">
+				<p style="color: red;" th:if="${#fields.hasErrors('senha')}"
+					th:errors="*{senha}" class="erro-msg">...</p>
+			</div>
+
+			<div id="perfis" hidden="true">
+				<h3>
+					<small id="labelperfil" class="form-text text-muted">Perfil</small>
+				</h3>
+
+				<div th:each="grupo, stat : ${grupos}">
+					<div class="form-group form-check">
+						<label class="form-check-label" th:for="${__${grupo.id}__}">
+							<input th:id="${__${grupo.id}__}"
+							th:name="|grupos[${stat.index}]|" th:value="${__${grupo.id}__}"
+							th:checked="${grupo.checked}" type="checkbox"
+							class="form-check-input" /> <span class="mdl-checkbox__label"
+							th:text="${grupo.descricao}">...</span>
+						</label>
+					</div>
+				</div>
+
+				<p style="color: red;" th:if="${#fields.hasErrors('grupos')}"
+					th:errors="*{grupos}" class="erro-msg">...</p>
+
+				<!-- type="submit" -->
+				<input id="salvarUsuario" class="btn btn-primary" type="button"
+					value="Salvar" />
+			</div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript" src="../js/system/cadastrar_usuario.js"></script>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X8 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="186.481mm" height="194.063mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 20987 21840"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID0" horiz-adv-x="667" font-variant="normal" style="fill-rule:nonzero" font-weight="400">
+	<font-face 
+		font-family="Arial">
+		<font-face-src>
+			<font-face-name name="Arial"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="7" horiz-adv-x="556" d="M46.9995 623l0 84.0004 463.001 0 0 -68.0007c-45.5014,-48.499 -90.8342,-112.999 -135.5,-193.499 -44.8344,-80.5 -79.3346,-163.334 -103.833,-248.501 -17.5008,-59.833 -28.8347,-125.666 -33.6676,-197l-90.0001 0c0.999708,56.334 12.0009,124.5 33.1677,204.333 21.1654,80.0001 51.3325,157 90.8327,231.167 39.5002,74.166 81.4997,136.667 126,187.5l-350.001 0z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Arial";font-variant:normal;font-weight:normal;src:url("#FontID0") format(svg)}
+    .fil4 {fill:#FEFEFE}
+    .fil3 {fill:#F58634}
+    .fil1 {fill:url(#id2)}
+    .fil2 {fill:url(#id3)}
+    .fil0 {fill:url(#id4)}
+    .fnt0 {font-weight:normal;font-size:7677.65px;font-family:'Arial'}
+   ]]>
+  </style>
+    <mask id="id0">
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="2663.99" y1="11649.6" x2="10174.8" y2="25387.4">
+   <stop offset="0" style="stop-opacity:1; stop-color:white"/>
+   <stop offset="0.388235" style="stop-opacity:94.3647; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:0; stop-color:white"/>
+  </linearGradient>
+     <rect style="fill:url(#id1)" x="5411" y="5630" width="10166" height="10580"/>
+    </mask>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="5045.53" y1="3659.26" x2="15370" y2="17474.9">
+   <stop offset="0" style="stop-opacity:1; stop-color:#FEFEFE"/>
+   <stop offset="0.411765" style="stop-opacity:1; stop-color:#E9EAEC"/>
+   <stop offset="0.690196" style="stop-opacity:1; stop-color:#D9DCDE"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#C6CED2"/>
+  </linearGradient>
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" x1="7182.76" y1="7629.07" x2="13859.7" y2="14101.3">
+   <stop offset="0" style="stop-opacity:1; stop-color:#9FD2A0"/>
+   <stop offset="0.54902" style="stop-opacity:1; stop-color:#4BA9BA"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#0089CD"/>
+  </linearGradient>
+  <linearGradient id="id4" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="12600.8" y1="14310.6" x2="3007.43" y2="248.393">
+  </linearGradient>
+ </defs>
+ <g id="Camada_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1182818288">
+   <path class="fil0" d="M102 10920c0,5972 4652,10814 10392,10814l0 0c5738,0 10391,-4842 10391,-10814 0,-5972 -4653,-10814 -10391,-10814 -5740,0 -10392,4842 -10392,10814l0 0z"/>
+   <path class="fil1" d="M0 10920c0,6021 4708,10920 10494,10920l0 0c5785,0 10493,-4899 10493,-10920l0 0c0,-6021 -4708,-10920 -10493,-10920 -5786,0 -10494,4899 -10494,10920zm203 0c0,-5905 4617,-10708 10291,-10708l0 0c5674,0 10289,4803 10289,10708l0 0c0,5905 -4615,10708 -10289,10708l0 0c-5674,0 -10291,-4803 -10291,-10708l0 0z"/>
+   <path class="fil2" d="M9081 5759c-2736,812 -4325,3785 -3547,6631l0 0c780,2846 3637,4501 6373,3690l0 0c2732,-810 4324,-3785 3545,-6630l0 0c-644,-2357 -2716,-3898 -4961,-3897l0 0c-466,0 -940,67 -1410,206zm-3403 6589c-757,-2763 788,-5652 3444,-6439l0 0c2654,-787 5429,821 6186,3583l0 0c757,2762 -788,5651 -3443,6437l0 0c-457,137 -917,201 -1371,201l0 0c-2180,-1 -4190,-1495 -4816,-3782l0 0z"/>
+   <path class="fil3" style="mask:url(#id0)" d="M10497 5631l-22 0c-453,3 -915,68 -1373,204l0 0c-2700,800 -4265,3725 -3495,6534l0 0c770,2808 3580,4438 6280,3637l0 0c2698,-801 4263,-3726 3493,-6535l0 0c-637,-2325 -2671,-3840 -4883,-3840z"/>
+   <text x="8422" y="13646"  class="fil4 fnt0">7</text>
+  </g>
+ </g>
+</svg>

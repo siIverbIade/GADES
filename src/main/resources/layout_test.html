@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>SESMEC 2</title>
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<!-- Custom styles for this template-->
+<link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+	<!-- Inicio da àrea de testes-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="card shadow mb-4" xmlns:th="http://www.thymeleaf.org">
+	<div
+		class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">Cadastro de Usuário</h6>
+		<div class="dropdown no-arrow">
+			<a class="dropdown-toggle" href="#" onclick="return false;"
+				role="button" id="dropdownMenuLink" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false"> <i
+				class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+			</a>
+			<div
+				class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+				aria-labelledby="dropdownMenuLink">
+				<div class="dropdown-header">Dropdown Header:</div>
+				<a class="dropdown-item" href="#" onclick="return false;">Action</a>
+				<a class="dropdown-item" href="#" onclick="return false;">Another
+					action</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#" onclick="return false;">Something
+					else here</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table id="dataTable" class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Login</th>
+						<th>Ativo</th>
+						<th>Editar</th>
+						<th>Excluir</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="usuarioModel : ${usuariosModel}">
+						<td th:text="${usuarioModel.id}">2</td>
+						<td th:text="${usuarioModel.nomeFuncionario}">CPD</td>
+						<td th:text="${usuarioModel.login}">1234</td>
+						<td th:if="${usuarioModel.ativo}" th:text="Sim"></td>
+						<td th:unless="${usuarioModel.ativo}" th:text="Não"></td>
+						<td><form class="edit_usu_form"
+								th:action="@{../usuario/editarCadastro}" method="get">
+								<button class="btn btn-primary" type="button">
+									<em>Editar</em>
+								</button>
+								<input type="hidden" name="idUsuario"
+									th:value="${usuarioModel.id}" />
+							</form></td>
+						<td><form class="del_usu_form"
+								th:action="@{../usuario/excluir}" method="post">
+								<button class="btn btn-primary" type="button">
+									<em>Deletar</em>
+								</button>
+								<input type="hidden" name="idUsuario"
+									th:value="${usuarioModel.id}" />
+							</form></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script src="vendor/datatables/jquery.dataTables.min.js"></script> 
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../js/system/consulta_usuario.js"></script>
+
+	<!-- Fim da àrea de testes-->
+	<!-- Bootstrap core JavaScript-->
+	<script src="static/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/system/sesmec.js"></script>
+	<script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="static/js/sb-admin-2.min.js"></script>
+</body>
+
+</html>
