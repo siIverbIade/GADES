@@ -8,14 +8,10 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import org.neo4j.driver.v1.Record;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.cpd.entity.nodes.NivelEscolar;
-import com.cpd.entity.nodes.AnoLetivo;
 import com.cpd.entity.nodes.Config;
 import com.cpd.entity.nodes.Setor;
 import com.cpd.entity.nodes.Estado;
@@ -23,7 +19,6 @@ import com.cpd.entity.nodes.Grupo;
 import com.cpd.entity.nodes.Localidade;
 import com.cpd.entity.nodes.MatriculaFuncional;
 import com.cpd.entity.nodes.Usuario;
-import com.cpd.repository.AnoLetivoRepository;
 import com.cpd.repository.NivelEscolarRepository;
 import com.cpd.repository.ConfigRepository;
 import com.cpd.repository.CurrentDB;
@@ -37,7 +32,6 @@ import com.cpd.type.DiaSemana;
 import com.cpd.type.Etnia;
 import com.cpd.type.Turno;
 import com.cpd.utils.Debug;
-
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
@@ -50,9 +44,6 @@ public class Query {
 
 	@Autowired
 	private NivelEscolarRepository anoRepository;
-
-	@Autowired
-	private AnoLetivoRepository anoLetivoRepository;
 
 	@Autowired
 	private GrupoRepository grupoRepository;
@@ -130,18 +121,6 @@ public class Query {
 		return funcionarioRepository.findAllByClasse(classe);
 	}
 
-	// ANOS LETIVOS
-	@GraphQLQuery
-	public AnoLetivo obterAnoLetivo(int nome) {
-		return anoLetivoRepository.findByNome(nome);
-	}
-
-	@GraphQLQuery
-	public Iterable<AnoLetivo> obterAnosLetivos(int pag, int porpag, String sort) {
-		Pageable sortedByNome = PageRequest.of(pag, porpag, Sort.by(sort));
-		return anoLetivoRepository.findAll(sortedByNome);
-	}
-
 	// ANOS ESCOLARES
 
 	@GraphQLQuery
@@ -159,10 +138,6 @@ public class Query {
 		return anoRepository.count();
 	}
 
-	@GraphQLQuery
-	public long contarAnosLetivos() {
-		return anoLetivoRepository.count();
-	}
 
 	// TIPOS
 
@@ -208,7 +183,7 @@ public class Query {
 
 	@GraphQLQuery
 	public String setConfig(Config conf) {
-
+		Debug.Print(conf);
 		if (conf.getEscolaInep() == null || setorRepository.findByInep(conf.getEscolaInep(), 0) == null) {
 			return "Erro Inep";
 		} else {
