@@ -1,2 +1,5 @@
-target/classes/application.properties
+target/
+logs/
 info.log
+
+
