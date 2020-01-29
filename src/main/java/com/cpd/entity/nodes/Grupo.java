@@ -2,8 +2,6 @@ package com.cpd.entity.nodes;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,10 +9,8 @@ import lombok.*;
 
 @NodeEntity
 @Data
-public class Grupo {
-	@Id @GeneratedValue Long id;
-	
-	private String nome;
+@EqualsAndHashCode(callSuper=false)
+public class Grupo extends Base {
 	
 	private String descricao;
 	

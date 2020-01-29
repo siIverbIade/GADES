@@ -1,14 +1,12 @@
 package com.cpd.entity.nodes;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @NodeEntity
 @Data
-public class OrgExp {
-	@Id @GeneratedValue Long id;
-	private String nome;
+@EqualsAndHashCode(callSuper=false)
+public class OrgExp extends Base {
 	private String sigla;
 }

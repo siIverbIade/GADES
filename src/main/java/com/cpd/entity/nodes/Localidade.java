@@ -1,7 +1,5 @@
 package com.cpd.entity.nodes;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import lombok.Data;
@@ -14,10 +12,10 @@ CREATE (:Tabela {campo1: line[0], campo2: line[1], campo3: line[2], num: TOINTEG
 
 @NodeEntity
 @Data
-public class Localidade {
-	@Id @GeneratedValue Long id;
+@EqualsAndHashCode(callSuper=false)
+public class Localidade extends Base {
+
 	private int cod;
-	private String nome;
 	
 	@EqualsAndHashCode.Exclude
 	@Relationship("PERTENCE_A")

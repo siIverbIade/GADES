@@ -1,19 +1,16 @@
 package com.cpd.entity.nodes;
 
 import java.util.List;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import lombok.*;
 
 @NodeEntity
 @Data
-public class Pais {
-	
-	@Id @GeneratedValue Long id;
+@EqualsAndHashCode(callSuper=false)
+public class Pais extends Base {
+
 	private int cod;
-	private String nome;
 	private String nacionalidade;
 	private String sigla;
 	

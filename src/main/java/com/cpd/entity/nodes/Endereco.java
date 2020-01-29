@@ -5,7 +5,8 @@ import org.neo4j.ogm.annotation.Relationship;
 import lombok.*;
 
 @Data
-public abstract class Endereco {
+@EqualsAndHashCode(callSuper=false)
+public abstract class Endereco extends Base {
 	
 	private String logradouro;
 	private String numero;

@@ -1,14 +1,13 @@
 package com.cpd.entity.nodes;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @NodeEntity
 @Data
-public class Formacao {
-	@Id @GeneratedValue Long id;
+@EqualsAndHashCode(callSuper=false)
+public class Formacao extends Base {
 	private String escolaridade;
 	private Boolean completo;
 }

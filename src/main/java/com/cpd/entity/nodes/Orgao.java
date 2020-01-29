@@ -1,18 +1,15 @@
 package com.cpd.entity.nodes;
 
 import java.util.List;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @NodeEntity
 @Data
-public class Orgao{
-	@Id @GeneratedValue Long id;
-
-	private String nome;
+@EqualsAndHashCode(callSuper=false)
+public class Orgao extends Base{
 	private List<String> telefones;
 	private String email;
 	

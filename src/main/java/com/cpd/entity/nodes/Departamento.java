@@ -1,18 +1,16 @@
 package com.cpd.entity.nodes;
 
 import java.util.List;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @NodeEntity
 @Data
-public class Departamento{
-	@Id @GeneratedValue Long id;
+@EqualsAndHashCode(callSuper=false)
+public class Departamento extends Base{
 
-	private String nome;
 	private String sigla;
 	private List<String> telefones;
 	private String email;

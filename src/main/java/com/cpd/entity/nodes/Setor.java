@@ -2,8 +2,6 @@ package com.cpd.entity.nodes;
 
 import java.util.List;
 import java.util.stream.Stream;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import com.cpd.entity.arrows.MatriculaEstudantil;
@@ -14,11 +12,7 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Setor extends PessoaJuridica {
-	@Id
-	@GeneratedValue
-	Long id;
 
-	private String nome;
 	private String email;
 	private String celular;
 	private Long inep;
@@ -44,7 +38,7 @@ public class Setor extends PessoaJuridica {
 		this.setComplemento(esc.getComplemento());
 		this.setCep(esc.getCep());
 		this.setNumero_cnpj(esc.getCnpj());
-		this.nome = esc.getNome();
+		this.setNome(esc.getNome());
 		this.celular = esc.getCelular();
 		this.inep = esc.getInep();
 		this.telefones = esc.getTelefones();
