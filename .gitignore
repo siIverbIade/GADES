@@ -3,3 +3,4 @@ logs/
 info.log
 .sts4-cache/classpath-data.json
 .vscode/launch.json
+.factorypath
