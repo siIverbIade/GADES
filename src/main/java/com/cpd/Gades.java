@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableNeo4jAuditing
 @EnableScheduling
-@EntityScan(basePackages = {"com.cpd.entity.nodes","com.cpd.entity.arrows","com.cpd.entity.abstracts"})
+@EntityScan(basePackages = {"com.cpd.entity.nodes","com.cpd.entity.arrows","com.cpd.model"})
 public class Gades {
     public static void main(String[] args) {
         SpringApplication.run(Gades.class, args);
