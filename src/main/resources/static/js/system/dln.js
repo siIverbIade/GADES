@@ -8,8 +8,8 @@ $(document).ready(function () {
 		$("#forms").load("/dln/escola");
 	});
 	
-	$("#anoletivo").click(function() {
-		$("#forms").load("/dln/anoletivo");
+	$("#calendarioescolar").click(function() {
+		$("#forms").load("/dln/calendarioescolar");
 	});
 	
 });

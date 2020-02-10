@@ -70,7 +70,7 @@ $(document).ready(function () {
 			var inep = $("#inep").val();
 		}
 		
-		graphql.request(uri, '{setConfig(conf: {escolaInep:' + inep + '})}').then(function(data){
+		graphql.request(uri, '{setConfig(conf: {escolaInep:' + inep + ', anoLetivo: 2019})}').then(function(data){
 			if (data.setConfig === "OK"){
 				$("#forms").load("/dln/escola");
 				$("#escfields").prop("hidden", false);
