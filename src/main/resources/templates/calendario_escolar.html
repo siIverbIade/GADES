@@ -1,0 +1,29 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="form-row">
+	<div class="form-group col-md-4">
+		<h1 class="h3 mb-2 text-gray-800">Calendário Escolar</h1>
+	</div>
+	<div class="form-group col-md-2">
+		<select id="ano_calendario" class="form-control" data-role="select">
+			<option value="">Selecione o Ano Escolar</option>
+			<option th:each="i : ${#numbers.sequence(1980, 2080)}" th:value="${i}" th:text="${i}"></option>
+		</select>
+	</div>
+	<div class="form-group col-md-2">
+		<select id="mes_calendario" class="form-control" data-role="select">
+			<option value="">Selecione o Mês</option>
+		</select>
+	</div>
+
+</div>
+
+<form id="calendarioescolar_form" th:action="@{/dln/calendarioescolar}" th:object="${CalendarioEscolar}"
+	class="form-horizontal" role="form" xmlns:th="http://www.thymeleaf.org" method="post">
+
+	<div id="meses" hidden=true>
+
+	</div>
+
+</form>
+
+<script type="text/javascript" src="../js/system/calendario_escolar.js"></script>
