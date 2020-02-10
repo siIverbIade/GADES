@@ -5,4 +5,5 @@ info.log
 .vscode/
 .factorypath
 .classpath
+.tern-project
 src/main/resources/templates/_notes/dwsync.xml
