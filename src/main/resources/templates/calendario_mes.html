@@ -1,0 +1,54 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style type="text/css">
+	#calendarioescolar table {
+		font-family: Verdana, Geneva, sans-serif;
+		font-size: 18px;
+		text-align: center;
+	}
+</style>
+
+<form id="calendarioescolar" th:action="@{../dln/calendarioescolarmes}" th:object="${Calendario}" method="get">
+	<table border="0" cellpadding="1" cellspacing="1">
+
+		<tr>
+			<td th:text="*{mes+' - '+anoLetivo}" colspan="7" style="font-size: 22px;color:white;background-color:gray">
+			</td>
+		</tr>
+
+		<tr style="font-size: 22px;color:white;background-color:lightgoldenrodyellow">
+			<td style="color: red;">D</td>
+			<td style="color: blue;">S</td>
+			<td style="color: blue;">T</td>
+			<td style="color: blue;">Q</td>
+			<td style="color: blue;">Q</td>
+			<td style="color: blue;">S</td>
+			<td style="color: black;">S</td>
+		</tr>
+
+		<tr>
+			<td style="height: 14px;" colspan="7"> </td>
+		</tr>
+
+		<tr style="height: 50px;" th:each="i : ${#numbers.sequence(0, 5)}">
+			<td style="width: 80px;font-size: 20px" th:each="j : ${#numbers.sequence(1, 7)}" >
+				<div th:switch="${Calendario.getDay(7 * i + j - 1)}">
+					<p th:case="''"></p>
+					<p th:id ="'dia'+${Calendario.getDay(7 * i + j - 1)}" th:case="*">
+						<button th:id ="'btn'+${Calendario.getDay(7 * i + j - 1)}" onclick="return false;" class="btn btn" th:style="'border: 1px solid lightblue; border-radius: 100%; height: 45px; width: 45px; color: '+${Calendario.corDeFrente(7 * i + j-1)}+'; background-color: '+${Calendario.corDeFundo(7 * i + j - 1)}+';'" th:text="${Calendario.getDay(7 * i + j - 1)}"></button>
+					</p>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<p></p>
+</form>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#btn5").click(function () {
+			var k = $("#dia5")
+			k.empty();
+			k.load("/dln/calendarioeditarrotulo?anoLetivo=2020&mes=1&dia=5");
+		});
+	});
+</script>

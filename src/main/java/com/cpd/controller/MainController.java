@@ -56,9 +56,9 @@ public class MainController {
 		return "administracao";
 	}
 
-	@GetMapping(value = "/anoletivo")
-	public String anoLetivo() {
-		return "ano_letivo";
+	@GetMapping(value = "/calendarioescolar")
+	public String calendarioEscolar() {
+		return "calendario_escolar";
 	}
 
 	@GetMapping(value = "/acessoNegado")

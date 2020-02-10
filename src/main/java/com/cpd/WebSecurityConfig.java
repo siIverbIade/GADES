@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			/*DETERMINA QUE PARA REALIZAR ESSA REQUEST PRECISA TER UMA DAS PERMISSÕES ABAIXO
 			 * EXEMPLO DA URL: http://localhost:8095/usuario/consultar */
 			.antMatchers("/usuario/consultar").access("hasRole('ROLE_ADMIN')")
-			.antMatchers("/sesmec").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_SESMEC')")
 			.antMatchers("/dme").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DME')")
 			.antMatchers("/dne").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DNE')")
 			.antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
@@ -71,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterAfter(new configurationCrsfFilter(), CsrfFilter.class)
 				.csrf()
 				.ignoringAntMatchers("/ano/**")
-				.ignoringAntMatchers("/anoletivo/**")
+				.ignoringAntMatchers("/calendarioescolar/**")
 				.ignoringAntMatchers("/graphql/**")
 				.ignoringAntMatchers("/gui/**")
 				.csrfTokenRepository(csrfTokenRepository());
