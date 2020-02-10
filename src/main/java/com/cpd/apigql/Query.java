@@ -1,41 +1,21 @@
 package com.cpd.apigql;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.IntStream;
 import org.neo4j.driver.v1.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-import com.cpd.entity.nodes.NivelEscolar;
-import com.cpd.entity.nodes.Config;
-import com.cpd.entity.nodes.Setor;
-import com.cpd.entity.nodes.Estado;
-import com.cpd.entity.nodes.Grupo;
-import com.cpd.entity.nodes.Localidade;
-import com.cpd.entity.nodes.MatriculaFuncional;
-import com.cpd.entity.nodes.Usuario;
-import com.cpd.repository.NivelEscolarRepository;
-import com.cpd.repository.ConfigRepository;
-import com.cpd.repository.CurrentDB;
-import com.cpd.repository.GrupoRepository;
-import com.cpd.repository.LocalidadeRepository;
-import com.cpd.repository.SetorRepository;
-import com.cpd.repository.EstadoRepository;
-import com.cpd.repository.FuncionarioRepository;
-import com.cpd.repository.UsuarioRepository;
-import com.cpd.type.DiaSemana;
-import com.cpd.type.Etnia;
-import com.cpd.type.Turno;
+import org.springframework.stereotype.Component;
+import com.cpd.entity.nodes.*;
+import com.cpd.model.RotuloCalendarioModel;
+import com.cpd.repository.*;
+import com.cpd.type.*;
 import com.cpd.utils.Debug;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
-@Service
+@Component
 @GraphQLApi
 public class Query {
 
@@ -66,14 +46,27 @@ public class Query {
 	@Autowired
 	private EstadoRepository estadoRepository;
 
+	@Autowired
+	private RotuloRepository rotuloRepository;
+
 	@GraphQLQuery
-	public List<Map<String, Object>> cypher(String query, String returns){
+	public String datasRotulos(String nome, int anoLetivo, int ord) {
+		return rotuloRepository.findByNome(nome).getDates(anoLetivo, ord);
+	}
+
+	@GraphQLQuery
+	public List<RotuloCalendarioModel> rotulosAnoLetivo(int anoLetivo) {
+		return rotuloRepository.rotulosAnoLetivo(anoLetivo);
+	}
+
+	@GraphQLQuery
+	public List<Map<String, Object>> cypher(String query, String returns) {
 		List<Record> registros = cypherRepository.OpenResult(query);
-        List<Map<String, Object>> queryMap = new ArrayList<Map<String, Object>>();
-		
-		try{
+		List<Map<String, Object>> queryMap = new ArrayList<Map<String, Object>>();
+
+		try {
 			IntStream.range(0, registros.size()).forEach(i -> queryMap.add(registros.get(i).get(returns).asMap()));
-		}catch(Exception e){
+		} catch (Exception e) {
 			Debug.Print(e.getMessage());
 		}
 		return queryMap;
@@ -138,8 +131,20 @@ public class Query {
 		return anoRepository.count();
 	}
 
-
 	// TIPOS
+
+	@GraphQLQuery
+	public List<String> meses(Boolean completo) {
+		List<String> l = new ArrayList<String>();
+		for (MesesAno mes : MesesAno.values()) {
+			if (completo) {
+				l.add(mes.FormatoCompleto());
+			} else {
+				l.add(mes.FormatoAbreviado());
+			}
+		}
+		return l;
+	}
 
 	@GraphQLQuery
 	public List<DiaSemana> semanas() {
@@ -183,7 +188,6 @@ public class Query {
 
 	@GraphQLQuery
 	public String setConfig(Config conf) {
-		Debug.Print(conf);
 		if (conf.getEscolaInep() == null || setorRepository.findByInep(conf.getEscolaInep(), 0) == null) {
 			return "Erro Inep";
 		} else {
