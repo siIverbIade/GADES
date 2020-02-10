@@ -4,3 +4,4 @@ info.log
 .sts4-cache/classpath-data.json
 .vscode/launch.json
 .factorypath
+src/main/resources/templates/_notes/dwsync.xml
