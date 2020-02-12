@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.cpd.entity.nodes.Setor;
 import com.cpd.entity.nodes.MatriculaFuncional;
+import com.cpd.entity.nodes.RotuloCalendario;
 import com.cpd.model.CalendarioEscolarModel;
 import com.cpd.model.EscolaModel;
 import com.cpd.repository.ConfigRepository;
@@ -23,6 +24,7 @@ import com.cpd.repository.FuncionarioRepository;
 import com.cpd.repository.LocalidadeRepository;
 import com.cpd.repository.LotacaoRepository;
 import com.cpd.repository.OrganizacaoRepository;
+import com.cpd.repository.RotuloRepository;
 
 @Controller
 @RequestMapping("/dln")
@@ -55,12 +57,15 @@ public class DlnController {
 	@Autowired
 	private CalendarioEscolarService calendarioEscolarService;
 
-	@GetMapping(value = "")
+	@Autowired
+	private RotuloRepository rotuloRepository;
+
+	@GetMapping("")
 	public String sesmec() {
 		return "dln";
 	}
 
-	@GetMapping(value = "/escola")
+	@GetMapping("/escola")
 	public String carregarEscola(Model model) {
 		Long inep = configRepository.get().getEscolaInep();
 		Long fId1 = funcaoRepository.findByNome("DIRETOR ESCOLAR").getId();
@@ -92,9 +97,9 @@ public class DlnController {
 		return "escola";
 	}
 
-	@PostMapping(value = "/escola")
+	@PostMapping("/escola")
 	@ResponseBody
-	public void salvarEscola(@ModelAttribute("Escola") EscolaModel escolaModel) {
+	public String salvarEscola(@ModelAttribute("Escola") EscolaModel escolaModel) {
 		Setor esc = setorRepository.findByInep(escolaModel.getInep(), 2);
 
 		esc.setEscola(escolaModel);
@@ -117,32 +122,26 @@ public class DlnController {
 
 		configRepository.get().setEscolaInep(escolaModel.getInep());
 		setorRepository.save(esc);
+		return "OK";
 	}
 
-	@GetMapping(value = "/calendarioescolar")
+	@GetMapping("/calendarioescolar")
 	public String loadCalendarioEscolar() {
 		return "calendario_escolar";
 	}
 
-	@GetMapping(value = "/calendarioescolarmes")
-	public String loadCalendarioEscolarMes(@RequestParam(required = true) int anoLetivo, 
-		@RequestParam(required = true) int mes, Model model) {
-		CalendarioEscolarModel cem = new CalendarioEscolarModel(anoLetivo, mes, calendarioEscolarService.getListaRotulo(mes, anoLetivo));
+	@GetMapping("/calendarioescolarmes")
+	public String loadCalendarioEscolarMes(@RequestParam(required = true) int anoLetivo,
+			@RequestParam(required = true) int mes, Model model) {
+		CalendarioEscolarModel cem = new CalendarioEscolarModel(anoLetivo, mes,
+				calendarioEscolarService.getListaRotulo(mes, anoLetivo));
+		List<RotuloCalendario> rcm =rotuloRepository.findByGlobal(false);
 		model.addAttribute("Calendario", cem);
+		model.addAttribute("Rotulos", rcm);
 		return "calendario_mes";
 	}
 
-	@GetMapping(value = "/calendarioeditarrotulo")
-	@ResponseBody
-	public String CalendarioEditarRotulo(@RequestParam(required = true) int anoLetivo, 
-		@RequestParam(required = true) int mes, @RequestParam(required = true) int dia) {
-		System.out.println(anoLetivo);
-		System.out.println(mes);
-		System.out.println(dia);
-		return "<button id='btn5' onclick='return false;' class='btn btn' th:style='border: 1px solid lightblue; border-radius: 100%; height: 45px; width: 45px; color: black; background-color: red;' text='" + dia + "'>"+dia+"</button>";
-	}
-
-	@GetMapping(value = "/dashboard")
+	@GetMapping("/dashboard")
 	public String dashboard() {
 		return "dashboard";
 	}
