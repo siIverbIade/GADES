@@ -3,6 +3,7 @@ package com.cpd.utils;
 import com.cpd.type.DiaSemana;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
 
 public final class DateUtils {
 
@@ -10,6 +11,10 @@ public final class DateUtils {
 		DateTime dtOrg = new DateTime(ano, 01, 01, 00, 00, 00, DateTimeZone.forID("GMT"));
 		DateTime dtPlusDias = dtOrg.plusDays(dias);
 		return dtPlusDias;
+	}
+
+	public static DateTime getString(String data){
+		return DateTime.parse(data, DateTimeFormat.forPattern("dd/MM/yyyy"));
 	}
 
 	public static DateTime getData(int dia, int mes, int ano) {
