@@ -26,9 +26,23 @@ public class CalendarioEscolarService {
 	private RotuloRepository rotuloRepository;
 
 	public CalendarioEscolar newCal(int anoLetivo) {
+		List<RotuloCalendario> rcList = rotuloRepository.findByGlobal(true);
+		List<Long> cal = Arrays.asList(new Long[366]);
+		Collections.fill(cal, (long) 31452);
+
+		rcList.forEach(global -> {
+
+			IntStream.range(1, 1 + global.getTotalDates(anoLetivo)).forEach(i -> {
+				try {
+					cal.set(DateUtils.getString(global.getDates(anoLetivo, i)).getDayOfYear() - 1, global.getId());
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			});
+		});
+
 		CalendarioEscolar calendario = calendarioEscolarRepository.findByAnoLetivo(anoLetivo)
-				.orElse(new CalendarioEscolar(anoLetivo, rotuloRepository.findByNome("Dia Normal").getId(),
-						rotuloRepository.findByNome("Sábado").getId(), rotuloRepository.findByNome("Domingo").getId()));
+				.orElse(new CalendarioEscolar(anoLetivo, cal));
 		calendarioEscolarRepository.save(calendario);
 		return calendario;
 	}
@@ -43,7 +57,7 @@ public class CalendarioEscolarService {
 	public RotuloCalendario getRotulo(int dia, int anoLetivo) {
 		CalendarioEscolar calendarioEscolar = calendarioEscolarRepository.findByAnoLetivo(anoLetivo).get();
 		return rotuloRepository.findById(calendarioEscolar.getCalendario().get(dia - 1))
-				.orElse(rotuloRepository.findByNome("Dia Normal"));
+				.orElse(rotuloRepository.findByNome("Dia de aula normal"));
 	}
 
 	public void setRotulo(int dia, int anoLetivo, RotuloCalendario rotulo) {
@@ -55,7 +69,7 @@ public class CalendarioEscolarService {
 		CalendarioEscolar calendarioEscolar = calendarioEscolarRepository.findByAnoLetivo(anoLetivo).get();
 		return rotuloRepository
 				.findById(calendarioEscolar.getCalendario().get(DateUtils.getDiasDoAno(dia, mes, anoLetivo) - 1))
-				.orElse(rotuloRepository.findByNome("Dia Normal"));
+				.orElse(rotuloRepository.findByNome("Dia de aula normal"));
 	}
 
 	public void setRotulo(int dia, int mes, int anoLetivo, RotuloCalendario rotulo) {
