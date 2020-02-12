@@ -2,13 +2,13 @@ package com.cpd.model;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import com.cpd.entity.nodes.Setor;
-
+import org.springframework.data.neo4j.annotation.QueryResult;
 import lombok.Data;
 
 //POJO para escola.html
 @Data
+@QueryResult
 public class EscolaModel {
  
 	private Long id;
