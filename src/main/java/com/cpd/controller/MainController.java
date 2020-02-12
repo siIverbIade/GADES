@@ -25,12 +25,12 @@ public class MainController {
 	@Autowired
 	private LocalidadeRepository localidadeRepository;
 
-	@GetMapping(value = "/")
+	@GetMapping("/")
 	public String login() {
 		return "login";
 	}
 
-	@GetMapping(value = "/home")
+	@GetMapping("/home")
 	public String home(Model model) {
 		Organizacao org = organizacaoRepository.findAll(2).get(0);
 		OrganizacaoModel orgMod = new OrganizacaoModel(org);
@@ -41,7 +41,7 @@ public class MainController {
 		return "index";
 	}
 
-	@PostMapping(value = "/organizacao")
+	@PostMapping("/organizacao")
 	@ResponseBody
 	public void salvarOrganizacao(@ModelAttribute("Organizacao") OrganizacaoModel orgMod) {
 		Organizacao org = organizacaoRepository.findAll(2).get(0);
@@ -51,17 +51,17 @@ public class MainController {
 		organizacaoRepository.save(org);
 	}
 
-	@GetMapping(value = "/administracao")
+	@GetMapping("/administracao")
 	public String administracao() {
 		return "administracao";
 	}
 
-	@GetMapping(value = "/calendarioescolar")
+	@GetMapping("/calendarioescolar")
 	public String calendarioEscolar() {
 		return "calendario_escolar";
 	}
 
-	@GetMapping(value = "/acessoNegado")
+	@GetMapping("/acessoNegado")
 	public String acessoNegado() {
 		return "acessoNegado";
 	}
