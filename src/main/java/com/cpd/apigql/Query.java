@@ -50,6 +50,17 @@ public class Query {
 	private RotuloRepository rotuloRepository;
 
 	@GraphQLQuery
+	public List<RotuloCalendario> rotulosGlobais(){
+
+		return rotuloRepository.findByGlobal(true);
+	}
+
+	@GraphQLQuery
+	public int totalRotulos(String nome, int anoLetivo) {
+		return rotuloRepository.findByNome(nome).getTotalDates(anoLetivo);
+	}
+
+	@GraphQLQuery
 	public String datasRotulos(String nome, int anoLetivo, int ord) {
 		return rotuloRepository.findByNome(nome).getDates(anoLetivo, ord);
 	}
