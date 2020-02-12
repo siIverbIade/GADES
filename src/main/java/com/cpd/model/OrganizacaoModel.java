@@ -3,10 +3,12 @@ package com.cpd.model;
 import java.time.LocalDate;
 import java.util.List;
 import com.cpd.entity.nodes.Organizacao;
+import org.springframework.data.neo4j.annotation.QueryResult;
 import lombok.Data;
 
 //POJO para index.html
 @Data
+@QueryResult
 public class OrganizacaoModel {
  
 	private Long id;
