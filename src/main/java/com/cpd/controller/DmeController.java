@@ -14,12 +14,12 @@ public class DmeController {
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
-	@GetMapping(value="")
+	@GetMapping("")
 	public String sesmec(){
 		return "dme";
 	}
 	
-	@GetMapping(value="/funcionario")
+	@GetMapping("/funcionario")
 	public String editarFuncionario(Model model){
 		model.addAttribute("Funcionario", funcionarioRepository.findAll());
 		return "funcionario";
