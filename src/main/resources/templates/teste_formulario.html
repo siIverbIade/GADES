@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- o xmlns não importa nada, está aqui apenas
+	para que o interpretador html não acuse erro de sintaxe ao utilizar atributos começando com 'th:'
+	que estejam sendo utilizados.
+	
+	OBS: Thymeleaf usa a sintaxe "SpEL" (Spring Expression Language). Maiores informações em https://www.baeldung.com/spring-expression-language
+-->
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<h1 th:inline="text">Teste de "th:each" em [[${NomeDaLista}]]</h1>
+</head>
+
+<body>
+	<p>Lista valores:</p>
+
+	<div th:each="obj : ${ObjetoLista}">
+		<p th:text="${obj.toString()}"></p>
+	</div>
+
+</body>
+
+</html>
