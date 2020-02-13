@@ -3,7 +3,11 @@ package com.cpd.repository;
 import org.neo4j.driver.v1.*;
 import org.springframework.stereotype.Service;
 import static org.neo4j.driver.v1.Values.parameters;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 @Service
 public class CurrentDB {
@@ -15,6 +19,18 @@ public class CurrentDB {
 	private final String user = "neo4j";
 	private final String password = "tecanexo123";
 	private StatementResult result;
+
+	public List<Map<String, Object>> cypher(String query, String returns) {
+		List<Record> registros = OpenResult(query);
+		List<Map<String, Object>> queryMap = new ArrayList<Map<String, Object>>();
+
+		try {
+			IntStream.range(0, registros.size()).forEach(i -> queryMap.add(registros.get(i).get(returns).asMap()));
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return queryMap;
+	}
 
 	public CurrentDB() {
 		driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));

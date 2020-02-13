@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<h1>Área de testes</h1>
+
+<body>
+	<p>Debug Corpo:</p>
+
+	<form th:action="@{/submeter}" th:object="${Objeto}" id="teste-form" method="get">
+		<p th:each="obj : ${Objeto}" th:text="${obj.toString()}"></p>
+		<input id="submit-form" class="btn btn-primary" type="button"
+			value="Salvar" />
+	</form>
+
+	<div>
+		<p>Debug Script:</p>
+		<p id="script"></p>
+	</div>
+</body>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<script>
+	function printar(texto) {
+		//$(document).ready(function () {
+			$("#script").append(texto + "<br/>");
+		//});
+	};
+	function data(year, R) {
+		var sundays = new Array();
+		i = 1;
+		for (month = 1; month <= 12; month++) {
+			tdays = new Date(year, month, -1).getDate();
+			for (date = 1; date <= tdays; date++) {
+				smonth = (month < 10) ? '0' + month : month; sdate = (date < 10) ? '0' + date : date; dd = sdate + '/' + smonth + '/' + year;
+				day = new Date();
+				day.setDate(date);
+				day.setMonth(month - 1);
+				day.setFullYear(year);
+				if (day.getDay() === 6) {
+					sundays[i++] = dd;
+				}
+			}
+		};
+		sundays[0] = i - 1;
+		return sundays[R];
+	};
+	printar(data(2021, 22));
+
+</script>
+
+</html>

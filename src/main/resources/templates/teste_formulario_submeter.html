@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- o xmlns não importa nada, está aqui apenas
+	para que o interpretador html não acuse erro de sintaxe ao utilizar atributos começando com 'th:'
+	que estejam sendo utilizados.
+	
+	OBS: Thymeleaf usa a sintaxe "SpEL" (Spring Expression Language). Maiores informações em https://www.baeldung.com/spring-expression-language
+-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<h1>Teste de Formulário</h1>
+</head>
+
+<body>
+
+	<p>Submeter input:</p>
+	<form th:action="@{/testes/formulario}" th:object="${ObjetoSubmeter}" id="teste-form" method="post">
+		<label>Login</label>
+		<input th:field="*{login}" type="text"></input>
+		<label>Senha</label>
+		<input th:field="*{senha}" type="text"></input>
+		<input id="submit-form" class="btn btn-primary" type="submit" />
+	</form>
+
+	<p>Resultado input:</p>
+	<div th:object="${ObjetoSubmeter}">
+		<p th:text="'login = ' + *{login}"></p>
+		<p th:text="'senha = ' + *{senha}"></p>
+	</div>
+
+</body>
+
+</html>

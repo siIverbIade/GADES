@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.neo4j.annotation.QueryResult;
 import lombok.*;
 
 @Data
+@QueryResult
 public class UsuarioModel {
  
 	private Long id;

@@ -5,10 +5,13 @@ import java.util.List;
 import com.cpd.type.MesesAno;
 import com.cpd.utils.DateUtils;
 import org.joda.time.DateTime;
+import org.springframework.data.neo4j.annotation.QueryResult;
+
 import lombok.Data;
 
 //POJO para calendario_escolar.html
 @Data
+@QueryResult
 public class CalendarioEscolarModel {
 
 	private int anoLetivo;
@@ -37,6 +40,10 @@ public class CalendarioEscolarModel {
 			return "";
 		}
 
+	}
+
+	public String getNome(int f){
+		return cal.get(f).getNome();
 	}
 
 	public String getMes() {

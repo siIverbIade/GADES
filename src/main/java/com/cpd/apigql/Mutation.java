@@ -23,7 +23,7 @@ public class Mutation {
 
 	@GraphQLMutation
 	public RotuloCalendario rotuloNew(String nome) {
-		RotuloCalendario rc = new RotuloCalendario(nome, false, "", "", "white", "red", "");
+		RotuloCalendario rc = new RotuloCalendario(nome, false, false, "", "", "white", "red", "");
 		rotuloRepository.save(rc);
 		return rc;
 	}
