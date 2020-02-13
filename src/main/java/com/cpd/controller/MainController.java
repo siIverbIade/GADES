@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.cpd.entity.nodes.Organizacao;
 import com.cpd.model.OrganizacaoModel;
 import com.cpd.repository.EstadoRepository;
@@ -28,6 +32,16 @@ public class MainController {
 	@GetMapping("/")
 	public String login() {
 		return "login";
+	}
+
+	@GetMapping("/teste")
+	public String carregarFormulario(Model model) {
+		List<String> lista = new ArrayList<String>();
+		lista.add("primeiro da lista");
+		lista.add("segundo da lista");
+		lista.add("terceiro da lista");
+		model.addAttribute("Objeto", lista);
+		return "teste";
 	}
 
 	@GetMapping("/home")
