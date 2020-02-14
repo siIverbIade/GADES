@@ -13,7 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,14 +31,16 @@
 			<div class="notfound-404">
 				<h1>4<span>0</span>4</h1>
 			</div>
-			<h2>the page you requested could not found</h2>
+			<h2>the page you requested could not be found</h2>
+			
 			<form class="notfound-search">
-				<input type="text" placeholder="Search...">
+				<input type="text" placeholder="Localizar...">
 				<button type="button"><span></span></button>
 			</form>
+			<input type="button" value="Voltar" onclick="history.back()">
 		</div>
 	</div>
-
+	
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
