@@ -1,8 +1,6 @@
 package com.cpd.apigql;
 
 import java.util.*;
-import java.util.stream.IntStream;
-import org.neo4j.driver.v1.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +9,6 @@ import com.cpd.entity.nodes.*;
 import com.cpd.model.RotuloCalendarioModel;
 import com.cpd.repository.*;
 import com.cpd.type.*;
-import com.cpd.utils.Debug;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
@@ -72,15 +69,7 @@ public class Query {
 
 	@GraphQLQuery
 	public List<Map<String, Object>> cypher(String query, String returns) {
-		List<Record> registros = cypherRepository.OpenResult(query);
-		List<Map<String, Object>> queryMap = new ArrayList<Map<String, Object>>();
-
-		try {
-			IntStream.range(0, registros.size()).forEach(i -> queryMap.add(registros.get(i).get(returns).asMap()));
-		} catch (Exception e) {
-			Debug.Print(e.getMessage());
-		}
-		return queryMap;
+		return cypherRepository.loadCypher(query, returns);
 	}
 
 	// LOCALIDADE
