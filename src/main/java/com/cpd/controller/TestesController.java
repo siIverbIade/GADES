@@ -28,10 +28,7 @@ import com.cpd.utils.Debug;
 @RequestMapping("/testes") /* (opcional) diz que esta classe está funcionando no endereço base'http://localhost:8080/testes/...etc'.*/
 public class TestesController {
 
-	@GetMapping() /*
-					 * este método do tipo 'HTTP GET (Enviar ao cliente)' disponível na url
-					 * http://localhost:8080/testes no navegador
-					 */
+	@GetMapping() /* este método do tipo 'HTTP GET (Enviar ao cliente)' disponível na url http://localhost:8080/testes no navegador */
 	public String carregarNaRaiz() {
 		return "Google2";/*
 							 * O spring vai procurar um template de nome 'Google2.html' na pasta do projeto
