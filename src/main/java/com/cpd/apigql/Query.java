@@ -48,7 +48,6 @@ public class Query {
 
 	@GraphQLQuery
 	public List<RotuloCalendario> rotulosGlobais(){
-
 		return rotuloRepository.findByGlobal(true);
 	}
 
@@ -114,7 +113,7 @@ public class Query {
 		return funcionarioRepository.findAllByClasse(classe);
 	}
 
-	// ANOS ESCOLARES
+	// NIVEL ESCOLAR
 
 	@GraphQLQuery
 	public Iterable<NivelEscolar> obterAnos() {
