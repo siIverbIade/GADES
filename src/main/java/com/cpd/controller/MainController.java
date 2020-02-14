@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -35,12 +36,15 @@ public class MainController {
 	}
 
 	@GetMapping("/teste")
-	public String carregarFormulario(Model model) {
+	public String carregarFormulario(@RequestParam(required = false) boolean droplist, Model model) {
 		List<String> lista = new ArrayList<String>();
 		lista.add("primeiro da lista");
 		lista.add("segundo da lista");
 		lista.add("terceiro da lista");
+
+		if (droplist) {model.addAttribute("Estado", estadoRepository.findAllByPais("Brasil"));}
 		model.addAttribute("Objeto", lista);
+		model.addAttribute("Droplist", droplist);
 		return "teste";
 	}
 
