@@ -1,15 +1,14 @@
 package com.cpd.repository;
 
 import org.neo4j.driver.v1.*;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import static org.neo4j.driver.v1.Values.parameters;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-@Service
+@Component
 public class CurrentDB {
 	// Driver objects are thread-safe and are typically made available
 	// application-wide.
@@ -20,7 +19,7 @@ public class CurrentDB {
 	private final String password = "tecanexo123";
 	private StatementResult result;
 
-	public List<Map<String, Object>> cypher(String query, String returns) {
+	public List<Map<String, Object>> loadCypher(String query, String returns) {
 		List<Record> registros = OpenResult(query);
 		List<Map<String, Object>> queryMap = new ArrayList<Map<String, Object>>();
 
