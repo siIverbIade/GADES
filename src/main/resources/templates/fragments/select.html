@@ -1,0 +1,6 @@
+<div th:fragment="selectOption" th:unless="${#lists.isEmpty(Estado)}" class="results-block">
+    <select id="uf" class="form-control" data-role="select">
+        <option value="">Selecione a UF</option>
+        <option th:each="e : ${Estado}" th:text="${e.sigla}" th:value="${e.id}"></option>
+    </select>
+</div>
