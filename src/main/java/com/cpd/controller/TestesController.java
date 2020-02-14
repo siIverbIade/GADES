@@ -166,12 +166,23 @@ public class TestesController {
 
 	}
 
-	@RequestMapping(value = "/google")
+	@GetMapping(value = "/google")
 	public String redirectToGoogle(@RequestParam(required = false) boolean fake) {
 		if (fake) {
 			return "redirect:/testes/pagina"; /* podemos redirecionar para outro mapeamento: http://localhost:8080/testes/google fica equivalente a http://localhost:8080/testes/pagina */
 		} else {
 			return "redirect:http://www.google.com.br"; /* ou podemos redirecionar para servidor externo http://localhost:8080/testes/google?fake=false */
 		}
+	}
+
+	@GetMapping(value = "/combobox")
+	public String carregarDroplistEstado(Model model) {
+		model.addAttribute("Estado", estadoRepository.findAllByPais("Brasil"));
+		return "fragments/select :: selectOption"; /* http://localhost:8080/testes/combobox retorna apenas o 
+		fragmento html contido em /fragments/select.html, mas apenas o que tiver dentro da tag
+		marcada com th:fragment="selectOption". Isto é muito útil para ser usado com
+		requisições ajax ou jquery &(object).load("/testes/combobox") para carregamento dinâmico.
+
+		Acesse http://localhost:8080/teste e clique em Carregar Droplist */
 	}
 }
