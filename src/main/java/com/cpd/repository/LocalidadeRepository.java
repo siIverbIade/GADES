@@ -18,6 +18,11 @@ public interface LocalidadeRepository extends Neo4jRepository<Localidade, Long>{
 	public List<Localidade> findByUfId(Long ufid);
 	
 	@Query("MATCH (m:Localidade)-[r:PERTENCE_A]->(e:Estado) WHERE m.cod={0} RETURN m, r, e ORDER BY m.nome")
-	public List<Localidade> findByCod(int cod);
-	
+	public Localidade findByCod(int cod);
+
+	@Query("CREATE CONSTRAINT ON (k:Localidade) ASSERT k.cod IS UNIQUE")
+	public void addCodConstraint();
+
+	@Query("DROP CONSTRAINT ON (k:Localidade) ASSERT k.cod IS UNIQUE")
+	public void removeCodConstraint();
 }
