@@ -12,8 +12,12 @@ import com.cpd.type.*;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 
-@Component
-@GraphQLApi
+/*ACESSE http://localhost:8080/gui e brinque no playground. CTRL+espaço mostra a lista de métodos e campos disponíveis
+	Simples e fácil.
+*/
+
+@Component // Bean informando que este componente deve ser gerenciado pelo Spring
+@GraphQLApi //informa que os métodos devem ser exportados para http://localhost:8080/graphql
 public class Query {
 
 	@Autowired
@@ -46,7 +50,12 @@ public class Query {
 	@Autowired
 	private RotuloRepository rotuloRepository;
 
-	@GraphQLQuery
+	//CALENDÁRIO
+
+	@GraphQLQuery /*Indica que este método é uma 'query' (sempre HTTP GET), e estara disponível dentro de query{...},
+		Ex: copie e cole 'query{rotulosGlobais {nome}}' (sem aspas) e 
+		obtenha o nome de todos os rótulos que são padrões no calendário*/
+
 	public List<RotuloCalendario> rotulosGlobais(){
 		return rotuloRepository.findByGlobal(true);
 	}
@@ -83,7 +92,7 @@ public class Query {
 	}
 
 	@GraphQLQuery
-	public List<Localidade> filtrarMunicipioByIbge(int cod) {
+	public Localidade filtrarMunicipioByIbge(int cod) {
 		return localidadeRepository.findByCod(cod);
 	}
 
@@ -214,5 +223,18 @@ public class Query {
 	public Setor inst(long inep) {
 		Setor escola = setorRepository.findByInep(inep, 2);
 		return escola;
+	}
+
+	// CONSTRAINTS
+	@GraphQLQuery
+	public boolean addCodConstraint () {
+		localidadeRepository.addCodConstraint();
+		return true;
+	}
+
+	@GraphQLQuery
+	public boolean removeCodConstraint () {
+		localidadeRepository.removeCodConstraint();
+		return true;
 	}
 }

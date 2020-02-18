@@ -21,7 +21,9 @@ public class Mutation {
 	@Autowired
 	private RotuloRepository rotuloRepository;
 
-	@GraphQLMutation
+	@GraphQLMutation /*Indica que este método é uma 'mutation' (sempre HTTP POST), e estara disponível dentro de mutation{...},
+	Ex: copie e cole 'mutation{rotuloNew(nome: "Feriado Teste") {nome temAula global}}' (sem aspas) e 
+	obtenha o nome do rótulo de nome "Feriado Teste" que acabou de criar */
 	public RotuloCalendario rotuloNew(String nome) {
 		RotuloCalendario rc = new RotuloCalendario(nome, false, false, "", "", "white", "red", "");
 		rotuloRepository.save(rc);
