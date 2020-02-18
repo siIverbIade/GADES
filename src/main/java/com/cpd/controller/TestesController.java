@@ -2,6 +2,7 @@ package com.cpd.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
 import com.cpd.entity.nodes.Estado;
 import com.cpd.model.EstadoModel;
 import com.cpd.model.User;
@@ -41,14 +44,14 @@ public class TestesController {
 							 */
 	}
 
-	@GetMapping("/pagina") /* este método do tipo 'HTTP GET (Enviar ao cliente)' disponível na url http://localhost:8080/testes/pagina. 
+	@GetMapping(value = "/pagina") /* este método do tipo 'HTTP GET (Enviar ao cliente)' disponível na url http://localhost:8080/testes/pagina. 
 							 * OBS: Na ausência de @RequestMapping na definição da classe, o caminho declarado deve ser completo '/testes/pagina' */
 	public String carregarPagina() {
 		return "Google"; /* agora a página carrega! */
 	}
 
-	@GetMapping("/conteudo")
-	@ResponseBody /* esta anotação faz com que o endereço http://localhost:8080/testes/conteudo apenas retorne o valor da função */
+	@GetMapping("/conteudo") /* 'value = ' pode ser omitido, se for o único parâmetro a ser passado */
+	@ResponseBody /* aesta anotação faz com que o endereço http://localhost:8080/testes/conteudo apenas retorne o valor da função */
 	public String carregarConteudo() {
 		return "Google"; /* repare que mesmo a função 'carregarConteudo' sendo idêntica a 'carregarPagina' desta vez aperece apenas a palavra Google no navegador graças ao @ResponseBody */
 	}
@@ -80,7 +83,7 @@ public class TestesController {
 	@PostMapping("/formulario") /* OBS: métodos do tipo 'HTTP POST (Receber do cliente)' não podem ser executados diretamente pelo navegador. Vai dar o seguinte erro: "..Request method 'GET' not supported.." */
 	public String submeterFormulario(@ModelAttribute("ObjetoSubmeter") User obj) {
 		Debug.Print(obj); /* imprime no console o objeto de nome 'ObjetoSubmetido' que foi passado na página */
-		return "teste_formulario_submeter";
+		return "teste_formulario_submeter"; 
 	}
 
 	@GetMapping("/cypher")
@@ -120,7 +123,7 @@ public class TestesController {
 			});
 			model.addAttribute("ObjetoLista", est);
 		} else {
-			estado = estadoRepository.encontrarPeloNome(nome);/* Exemplo de busca utilizando repositório Spring data com método customuzado. EstadoModel é uma versão simplificada de Estado (verifique a classe) */
+			estado = estadoRepository.encontrarPeloNome(nome);/* Exemplo de busca utilizando repositório Spring data com método customizado. EstadoModel é uma versão simplificada de Estado (verifique a classe) */
 			model.addAttribute("ObjetoLista", estado);
 		}
 		model.addAttribute("NomeDaLista", "Lista de Estados com nome contendo \"" + nome + "\"");
@@ -147,12 +150,13 @@ public class TestesController {
 		 * (retorna "Oi você passou parâmetro1 = valor1 e parâmetro2 = valor2") */
 
 	@GetMapping("/httpstatus")
-	ResponseEntity<String> httpResponseEntityExemplo(@RequestParam("httpOk") boolean bool) {/* 'httpOK' sobrescreve o nome padrão que seria 'bool' */
-		/* Aqui vamos manipular para criar um 'handle' para manipular os códigos de erro http dentro do próprio 
+	@ResponseBody
+	ResponseEntity<String> httpResponseEntityExemplo(@RequestParam("httpTeste") boolean booleana) {/* 'httpOK' sobrescreve o nome padrão que seria 'bool' */
+		/* Aqui vamos simular um 'handle' para manipular os códigos de erro http dentro do próprio 
 			controlador atraves da interface ResponseEntity<T>. Para verificar a resposta http de uma página no google chrome clique com botão direito na página -> inspecionar ->
 			network: depois aperte F5 e veja o status que ela retorna.
 		*/
-		if (!bool) {
+		if (!booleana) {
 			/* http://localhost:8080/testes/httpstatus?httpOk=false
 			ResponseEntity retorna http error code 400 */
 			return new ResponseEntity<>("Mensagem de HTTP bad request", HttpStatus.BAD_REQUEST);
@@ -163,7 +167,7 @@ public class TestesController {
 
 	}
 
-	@GetMapping(value = "/google")
+	@GetMapping("/google")
 	public String redirectToGoogle(@RequestParam(required = false) boolean fake) {
 		if (fake) {
 			return "redirect:/testes/pagina"; /* podemos redirecionar para outro mapeamento: http://localhost:8080/testes/google fica equivalente a http://localhost:8080/testes/pagina */
@@ -172,14 +176,30 @@ public class TestesController {
 		}
 	}
 
-	@GetMapping(value = "/combobox")
+	@GetMapping("/combobox")
 	public String carregarDroplistEstado(Model model) {
 		model.addAttribute("Estado", estadoRepository.findAllByPais("Brasil"));
 		return "fragments/select :: selectOption"; /* http://localhost:8080/testes/combobox retorna apenas o 
 		fragmento html contido em /fragments/select.html, mas apenas o que tiver dentro da tag
 		marcada com th:fragment="selectOption". Isto é muito útil para ser usado com
 		requisições ajax ou jquery &(object).load("/testes/combobox") para carregamento dinâmico.
-
+		
 		Acesse http://localhost:8080/teste e clique em Carregar Droplist */
+	}
+
+	@PostMapping(value = "/api/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE) /* consumes = MediaType.APPLICATION_JSON_VALUE define que o objeto deve ser passado no formato JSON */
+	@ResponseBody
+	public User userApi(@RequestBody @Valid User user) {/* agora temos a introdução de @RequestBody que só é possível
+		através de comando Unix "cURL". Para ter curl no windows baixe o binario https://curl.haxx.se/windows/dl-7.68.0/curl-7.68.0-win64-mingw.zip
+		depois copie e cole o comando a seguir no cmd: 
+		curl --header "Content-Type: application/json" --request POST --data '{"login":"abc","senha":"xyz"}' http://localhost:8080/testes/api/user 
+		*/
+		Debug.Print(user);
+		return user; /* ATENÇÃO: caso a resposta do servidor seja "Request method 'POST' not supported" é porque
+		este endpoint precisa ser configurado no Spring Security através do módulo WebSecurityConfigurerAdapter, neste caso
+		implementamos na classe de nome WebSecurityConfig adicionando pelo menos 'http.ignoringAntMatchers("/testes/api/**")' 
+		
+		Acesse http://localhost:8080/teste e clique em '"ENVIAR dados AJAX para o endereço "/api/user"' para ver o funcionamento
+		*/
 	}
 }
