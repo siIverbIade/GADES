@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 	rel="stylesheet">
-<link href="css/sb-admin-2.min.css" rel="stylesheet">-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
@@ -18,12 +20,13 @@
 		<p th:each="obj : ${Objeto}" th:text="${obj.toString()}"></p>
 	</form>
 
-	<input id="btn1" type="button" value="Carregar Droplist Via JQuery (fica sem refresh)" />
-	<div id="toLoad"></div>
+	<input id="btn1" type="button" value="Carregar Droplist Via JQuery.load() (fica sem refresh)" />
+	<div id="toLoad" class="col-sm-2"></div>
 
-	<input id="btn2" type="button" onclick="window.location.href = '/teste?droplist=true';" value="Carregar Droplist Via Controlador JAVA (fica com refresh)"/></input>
+	<input id="btn2" type="button" onclick="window.location.href = '/teste?droplist=true';"
+		value="Carregar Droplist Via Controlador JAVA (fica com refresh)" /></input>
 
-	<div th:if="${Droplist} eq true">
+	<div th:if="${Droplist} eq true" class="col-sm-2">
 		<select id="uf" class="form-control" data-role="select">
 			<option value="">Selecione a UF</option>
 			<option th:each="e : ${Estado}" th:text="${e.sigla}" th:value="${e.id}"></option>
@@ -34,6 +37,9 @@
 		<p>Debug Script:</p>
 		<p id="script"></p>
 	</div>
+	<input id="login"></input>
+	<input id="senha"></input>
+	<button id="api">ENVIAR dados AJAX para o endereço "/api/user"</button>
 </body>
 
 <!-- Core plugin JavaScript-->
@@ -41,10 +47,26 @@
 
 <script>
 	function printar(texto) {
-		//$(document).ready(function () {
 		$("#script").append(texto + "<br/>");
-		//});
 	};
+	$(document).ready(function () {
+		$("#api").click(function () {
+			var usuario = {
+				login: $("#login").val(),
+				senha: $("#senha").val()
+			}
+
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:8080/testes/api/user",
+				data: JSON.stringify(usuario),
+				success: function (dados) {
+					alert(JSON.stringify(dados));
+				},
+				contentType: "application/json"
+			});
+		});
+	});
 	function data(year, R) {
 		var sundays = new Array();
 		i = 1;
@@ -71,5 +93,5 @@
 	});
 
 </script>
-
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </html>
