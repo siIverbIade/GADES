@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import com.cpd.entity.nodes.*;
+import com.cpd.model.Labeled;
 import com.cpd.model.RotuloCalendarioModel;
 import com.cpd.repository.*;
 import com.cpd.type.*;
@@ -49,6 +50,16 @@ public class Query {
 
 	@Autowired
 	private RotuloRepository rotuloRepository;
+
+	@Autowired
+	private AuditRepository auditRepository;
+
+	//AUDITORIA
+
+	@GraphQLQuery
+	public List<Labeled> dadosNovos(String data) {
+		return auditRepository.getFlush(data);
+	}
 
 	//CALENDÁRIO
 
