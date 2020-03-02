@@ -1,6 +1,7 @@
 target/
 logs/
 info.log
+info.log.*
 .sts4-cache/
 .vscode/
 .settings/
