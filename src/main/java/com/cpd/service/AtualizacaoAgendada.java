@@ -2,40 +2,50 @@ package com.cpd.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import com.cpd.entity.nodes.Localidade;
-import com.cpd.repository.LocalidadeRepository;
+import java.util.List;
+import com.cpd.model.Labeled;
+import com.cpd.repository.AuditRepository;
+import com.cpd.repository.ConfigRepository;
+import com.cpd.utils.Debug;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 @Component
 public class AtualizacaoAgendada {
 
 	private static final Logger log = LoggerFactory.getLogger(AtualizacaoAgendada.class);
-
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
 	@Autowired
-	private LocalidadeRepository localidadeRepository;
+	private AuditRepository auditRepository;
+	
+	@Autowired
+	private ConfigRepository cr;
 
-	//@Scheduled(fixedRate = 180000)
+	@Scheduled(fixedRate = 60000)
 	public void reportCurrentTime() {
-		//RestTemplate restTemplate = new RestTemplate();
-		Iterable<Localidade> mun = localidadeRepository.findAll();
-		
-		mun.forEach(m -> {
-			/*String sql = "INSERT INTO localidade (id, cod, nome) VALUES (" + m.getId() + ", " + m.getCod() + ", \""
-					+ m.getNome() + "\")";*/
-			try {
-				//System.out.println(sql);
-				//System.out.println(restTemplate.getForEntity("http://192.168.10.106/teste/inserteste?"+sql, String.class));
-			} catch (RestClientException e) {
-				System.out.println(e.getMessage());
-			}
-		});
+		List<Labeled> ll = auditRepository.getFlush("10/02/2020");
+		String UploadJson = Debug.Load(ll);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		RestTemplate restTemplate = new RestTemplate();
+		HttpEntity<String> entity = new HttpEntity<String>(UploadJson,headers);
+		try {
+			String answer = restTemplate.postForObject("http://localhost/GADES_MASTER/", entity, String.class);
+			System.out.println(answer);
+
+		} catch (RestClientException e) {
+			System.out.println(e.getMessage());
+		}
+
 		log.info("UPLOAD TERMINADO {}", dateFormat.format(new Date()));
 	}
 }
