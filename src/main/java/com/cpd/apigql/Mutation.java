@@ -21,9 +21,18 @@ public class Mutation {
 	@Autowired
 	private RotuloRepository rotuloRepository;
 
-	@GraphQLMutation /*Indica que este método é uma 'mutation' (sempre HTTP POST), e estara disponível dentro de mutation{...},
-	Ex: copie e cole 'mutation{rotuloNew(nome: "Feriado Teste") {nome temAula global}}' (sem aspas) e 
-	obtenha o nome do rótulo de nome "Feriado Teste" que acabou de criar */
+	@Autowired
+	private Cfg cfg;
+
+	@Autowired
+	private ConfigRepository configRepository;
+
+	@GraphQLMutation /*
+						 * Indica que este método é uma 'mutation' (sempre HTTP POST), e estara
+						 * disponível dentro de mutation{...}, Ex: copie e cole
+						 * 'mutation{rotuloNew(nome: "Feriado Teste") {nome temAula global}}' (sem
+						 * aspas) e obtenha o nome do rótulo de nome "Feriado Teste" que acabou de criar
+						 */
 	public RotuloCalendario rotuloNew(String nome) {
 		RotuloCalendario rc = new RotuloCalendario(nome, false, false, "", "", "white", "red", "");
 		rotuloRepository.save(rc);
@@ -64,6 +73,12 @@ public class Mutation {
 	public boolean deletarAno(NivelEscolar ano) {
 		anoRepository.delete(ano);
 		return true;
+	}
+
+	@GraphQLMutation
+	public Config setConfig(String param, String val) {
+		cfg.setCfg(param, val);
+		return configRepository.get();
 	}
 
 }
