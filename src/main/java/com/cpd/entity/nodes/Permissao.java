@@ -17,8 +17,8 @@ public class Permissao extends Base {
 	private String permissao;
 	
 	@EqualsAndHashCode.Exclude
-	@JsonIgnore
 	@Relationship(type="CONCEDE_ACESSO", direction=Relationship.INCOMING)
+	@JsonIgnore
     private List<Grupo> grupo = new ArrayList<>();
    
 }

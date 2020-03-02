@@ -1,9 +1,10 @@
 package com.cpd.entity.nodes;
 
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.typeconversion.DateString;
+import org.neo4j.ogm.annotation.typeconversion.DateLong;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import lombok.*;
@@ -12,14 +13,16 @@ import lombok.*;
 public abstract class Base {
 	
     @Id @GeneratedValue Long id;
-	
-    private String nome;
     
+    private String nome;
     @CreatedDate
-    @DateString("dd/MM/YYYY")
+    @DateLong
+    @JsonIgnore
     private Date dataCriacao;
         
     @LastModifiedDate
-    @DateString("dd/MM/YYYY")
+    @DateLong
+    @JsonIgnore
     private Date dataModificado;
+
 }

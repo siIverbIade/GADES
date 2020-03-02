@@ -6,6 +6,8 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import com.cpd.entity.arrows.MatriculaEstudantil;
 import com.cpd.model.EscolaModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @NodeEntity
@@ -19,16 +21,19 @@ public class Setor extends PessoaJuridica {
 
 	@EqualsAndHashCode.Exclude
 	@Relationship(type = "MATRIZ", direction = Relationship.INCOMING)
+	@JsonIgnore
 	private Organizacao organizacao;
 
 	private List<String> telefones;
 
 	@EqualsAndHashCode.Exclude
 	@Relationship(type = "MATRICULADO", direction = Relationship.INCOMING)
+	@JsonIgnore
 	private List<MatriculaEstudantil> alunos;
 
 	@EqualsAndHashCode.Exclude
 	@Relationship(type = "LOTADO_EM", direction = Relationship.INCOMING)
+	@JsonIgnore
 	private List<Lotacao> funcionarios;
 
 	public void setEscola(EscolaModel esc) {

@@ -15,12 +15,13 @@ public class Grupo extends Base {
 	private String descricao;
 	
 	@EqualsAndHashCode.Exclude
-	@JsonIgnore
 	@Relationship(type="PERTENCE_A", direction=Relationship.INCOMING)
+	@JsonIgnore
 	private List<Usuario> usuario = new ArrayList<>();
 	
 	@EqualsAndHashCode.Exclude
 	@Relationship("CONCEDE_ACESSO")
+	@JsonIgnore
 	private List<Permissao> permissao = new ArrayList<>();
 
 

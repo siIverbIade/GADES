@@ -2,6 +2,8 @@ package com.cpd.entity.nodes;
 
 import java.util.List;
 import com.cpd.model.OrganizacaoModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import lombok.Data;
@@ -18,6 +20,7 @@ public class Organizacao extends PessoaJuridica {
 	
 	@EqualsAndHashCode.Exclude
 	@Relationship(type="SUBORDINADO", direction = Relationship.INCOMING)
+	@JsonIgnore
 	private List<Orgao> orgaos;
 	
 	public void setTelefone1(String tel) {
