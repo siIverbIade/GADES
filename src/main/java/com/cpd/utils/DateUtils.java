@@ -18,7 +18,7 @@ public final class DateUtils {
 	}
 
 	public static DateTime getString(String data){
-		return DateTime.parse(data, DateTimeFormat.forPattern("dd/MM/yyyy"));
+		return DateTime.parse(data, DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss"));
 	}
 
 	public static DateTime getData(int dia, int mes, int ano) {

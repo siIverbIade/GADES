@@ -21,8 +21,9 @@ public class AuditRepository {
 
 		try (Session session = db.session()) {
 			// Auto-commit transactions are a quick and easy way to wrap a read.
-			StatementResult result = session.run("MATCH (m) WHERE m.dataCriacao > " + DateUtils.getString(data).getMillis()
-					+ " or m.dataModificado > " + DateUtils.getString(data).getMillis() + " RETURN m as nodeId, labels(m)[0] as nodeLabel");
+			StatementResult result = session.run("MATCH (m) WHERE m.dataCriacao > "
+					+ DateUtils.getString(data).getMillis() + " or m.dataModificado > "
+					+ DateUtils.getString(data).getMillis() + " RETURN m as nodeId, labels(m)[0] as nodeLabel");
 			result.list().forEach(e -> {
 				Labeled l = new Labeled();
 				l.setTabela(e.get("nodeLabel").asString());
