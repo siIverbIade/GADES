@@ -1,54 +1,47 @@
 package com.cpd.repository;
 
 import org.neo4j.driver.v1.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import static org.neo4j.driver.v1.Values.parameters;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
+import com.cpd.utils.Debug;
+
 
 @Component
 public class CurrentDB {
 	// Driver objects are thread-safe and are typically made available
 	// application-wide.
+	@Autowired
 	Driver driver;
 
-	private final String uri = "bolt://localhost:7687";
-	private final String user = "neo4j";
-	private final String password = "tecanexo123";
 	private StatementResult result;
+
+	public String loadCypherJSON(String query, String returns) {
+		List<Record> registros = OpenResult(query);
+		List<Map<String, Object>> queryMap = new ArrayList<Map<String, Object>>();
+		
+		try {
+			IntStream.range(0, registros.size()).forEach(i -> {queryMap.add(registros.get(i).get(returns).asMap());});
+		} catch (Exception e) {
+			System.out.print("CDB: " + e.getMessage());
+		}
+		return Debug.Print(queryMap);
+	}
 
 	public List<Map<String, Object>> loadCypher(String query, String returns) {
 		List<Record> registros = OpenResult(query);
 		List<Map<String, Object>> queryMap = new ArrayList<Map<String, Object>>();
-
+		
 		try {
-			IntStream.range(0, registros.size()).forEach(i -> queryMap.add(registros.get(i).get(returns).asMap()));
+			IntStream.range(0, registros.size()).forEach(i -> {queryMap.add(registros.get(i).get(returns).asMap());});
 		} catch (Exception e) {
-			System.out.print(e.getMessage());
+			System.out.print("CDB: " + e.getMessage());
 		}
 		return queryMap;
-	}
-
-	public CurrentDB() {
-		driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
-	}
-
-	public CurrentDB(String uri, String user, String password) {
-		driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
-	}
-
-	public void Execute(String query, String parameter, String value) {
-		// Sessions are lightweight and disposable connection wrappers.
-		try (Session session = driver.session()) {
-			// Wrapping Cypher in an explicit transaction provides atomicity
-			// and makes handling errors much easier.
-			try (Transaction tx = session.beginTransaction()) {
-				tx.run(query, parameters(parameter, value));
-				tx.success(); // Mark this write as successful.
-			}
-		}
 	}
 
 	public void Execute(String query) {
@@ -85,7 +78,7 @@ public class CurrentDB {
 		return this.result.list();
 	};
 
-	public void close() {
+	public void close() throws Exception {
 		// Closing a driver immediately shuts down all open connections.
 		driver.close();
 	}
