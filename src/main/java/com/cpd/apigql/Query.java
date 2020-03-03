@@ -18,7 +18,8 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 */
 
 @Component // Bean informando que este componente deve ser gerenciado pelo Spring
-@GraphQLApi //informa que os métodos devem ser exportados para http://localhost:8080/graphql
+@GraphQLApi // informa que os métodos devem ser exportados para
+			// http://localhost:8080/graphql
 public class Query {
 
 	@Autowired
@@ -54,21 +55,23 @@ public class Query {
 	@Autowired
 	private AuditRepository auditRepository;
 
-	//AUDITORIA
+	// CALENDÁRIO
+
+	@GraphQLQuery /*
+					 * Indica que este método é uma 'query' (sempre HTTP GET), e estara disponível
+					 * dentro de query{...}, Ex: copie e cole 'query{rotulosGlobais {nome}}' (sem
+					 * aspas) e obtenha o nome de todos os rótulos que são padrões no calendário
+					 */
+
+	public List<RotuloCalendario> rotulosGlobais() {
+		return rotuloRepository.findByGlobal(true);
+	}
+
+	// AUDITORIA
 
 	@GraphQLQuery
 	public List<Labeled> dadosNovos(String data) {
 		return auditRepository.getFlush(data);
-	}
-
-	//CALENDÁRIO
-
-	@GraphQLQuery /*Indica que este método é uma 'query' (sempre HTTP GET), e estara disponível dentro de query{...},
-		Ex: copie e cole 'query{rotulosGlobais {nome}}' (sem aspas) e 
-		obtenha o nome de todos os rótulos que são padrões no calendário*/
-
-	public List<RotuloCalendario> rotulosGlobais(){
-		return rotuloRepository.findByGlobal(true);
 	}
 
 	@GraphQLQuery
@@ -238,13 +241,13 @@ public class Query {
 
 	// CONSTRAINTS
 	@GraphQLQuery
-	public boolean addCodConstraint () {
+	public boolean addCodConstraint() {
 		localidadeRepository.addCodConstraint();
 		return true;
 	}
 
 	@GraphQLQuery
-	public boolean removeCodConstraint () {
+	public boolean removeCodConstraint() {
 		localidadeRepository.removeCodConstraint();
 		return true;
 	}
