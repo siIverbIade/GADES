@@ -2,16 +2,14 @@ target/
 logs/
 info.log
 info.log.*
-.sts4-cache/
-.vscode/
-.settings/
-.factorypath
-.project
-.classpath
-.tern-project
+.*
+/build/
+bin/
 Thumbs.db
+!gradle-wrapper.jar
+gradle-app.setting
+.gradletasknamecache
 src/main/resources/templates - Cópia/
-src/main/resources/templates/_notes/dwsync.xml
-src/main/resources/static/img/Thumbs.db
-src/main/resources/templates/error.lnk
-src/main/resources/templates/Thumbs.db
+*.jar
+*.war
+*.ear
