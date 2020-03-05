@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>GE Admin - Login</title>
-<!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-<!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>GE Admin - Login</title>
+	<!-- Custom fonts for this template-->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
+	<!-- Custom styles for this template-->
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
+
 <body class="bg-gradient-primary">
 	<div class="container">
 		<!-- Outer Row -->
@@ -29,8 +29,8 @@
 						<!-- Nested Row within Card Body -->
 						<div class="row">
 							<div class="col-lg-6 d-none d-lg-block g-login-image">
-								<img class="d-block mx-auto mb-4" src="img/GADES2019TIMBLE.svg"
-									alt="" width="400" height="250">
+								<img class="d-block mx-auto mb-4" src="img/GADES2019TIMBLE.svg" alt="" width="400"
+									height="250">
 								<nav class="pg-empty-placeholder"></nav>
 								<nav>
 									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -42,13 +42,14 @@
 									</div>
 								</nav>
 							</div>
+
 							<div class="col-lg-6">
 								<div class="p-5">
 									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-4">O Grupo</h1>
+										<hr>
+										<h1 class="h4 text-gray-900 mb-4">Login</h1>
 									</div>
-									<form class="user" action="#"
-										th:action="@{/}" method="post">
+									<form class="user" action="#" th:action="@{/}" method="post">
 
 										<div class="form-group">
 											<input type="text" class="form-control form-control-user"
@@ -57,33 +58,32 @@
 										</div>
 										<div class="form-group">
 											<input type="password" class="form-control form-control-user"
-												id="exampleInputPassword" placeholder="Senha..."
-												name="password">
+												id="exampleInputPassword" placeholder="Senha..." name="password">
 										</div>
 										<div class="form-group">
 											<div class="custom-control custom-checkbox small">
-												<input id="rememberCheck" name="remember-me" type="checkbox" class="custom-control-input"
-													> <label
-													class="custom-control-label" for="rememberCheck">Me
+												<input id="rememberCheck" name="remember-me" type="checkbox"
+													class="custom-control-input"> <label class="custom-control-label"
+													for="rememberCheck">Me
 													lembre</label>
 											</div>
 										</div>
 
 										<button class="btn btn-primary btn-user btn-block">
 											Entrar</button>
-										<input type="hidden" th:name="${_csrf.parameterName}"
-											th:value="${_csrf.token}"
+										<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"
 											class="btn btn-primary btn-user btn-block" />
-										<hr>
+
 									</form>
-									<span th:if="${param.error}"> <span style='color: red'
-										th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
-									</span>
+									<div th:if="${param.error}">
+										<p style="color: red;text-align: center;"
+											th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
+									</div>
 									<hr>
 									<div class="text-center">
 										<a data-toggle="modal" href="#modal1">Esqueci minha senha</a>
-										<div class="modal fade pg-show-modal" id="modal1"
-											tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal fade pg-show-modal" id="modal1" tabindex="-1" role="dialog"
+											aria-hidden="true">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -99,8 +99,8 @@
 															<br>
 														</p>
 														<div class="form-group">
-															<input type="email" class="form-control"
-																id="formInput199" placeholder="Entre com seu email">
+															<input type="email" class="form-control" id="formInput199"
+																placeholder="Entre com seu email">
 														</div>
 													</div>
 													<div class="modal-footer">
@@ -132,4 +132,5 @@
 	<script type="text/javascript" src="assets/js/popper.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>
