@@ -25,4 +25,6 @@ public abstract class Base {
     @JsonIgnore
     private Date dataModificado;
 
+    private Boolean enabled;
+
 }
