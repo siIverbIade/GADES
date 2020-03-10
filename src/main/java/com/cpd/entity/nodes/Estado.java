@@ -1,6 +1,7 @@
 package com.cpd.entity.nodes;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import lombok.Data;
@@ -21,10 +22,12 @@ public class Estado extends Base {
 	
 	@EqualsAndHashCode.Exclude
 	@Relationship("PERTENCE_A")
+	@JsonIgnore
 	private Pais pais;
 	
 	@EqualsAndHashCode.Exclude
 	@Relationship(type="PERTENCE_A", direction=Relationship.INCOMING)
+	@JsonIgnore
 	private List<Localidade> municipios;
 	
 }

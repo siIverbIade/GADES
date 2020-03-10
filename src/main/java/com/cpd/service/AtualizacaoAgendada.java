@@ -2,40 +2,65 @@ package com.cpd.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import com.cpd.entity.nodes.Localidade;
-import com.cpd.repository.LocalidadeRepository;
+import java.util.List;
+
+import com.cpd.entity.nodes.Config;
+import com.cpd.model.Labeled;
+import com.cpd.repository.AuditRepository;
+import com.cpd.repository.ConfigRepository;
+import com.cpd.utils.Debug;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 @Component
 public class AtualizacaoAgendada {
 
 	private static final Logger log = LoggerFactory.getLogger(AtualizacaoAgendada.class);
-
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	@Autowired
-	private LocalidadeRepository localidadeRepository;
+	private AuditRepository auditRepository;
 
-	//@Scheduled(fixedRate = 180000)
+	@Autowired
+	private ConfigRepository cr;
+
+	@Scheduled(fixedRate = 60000)
 	public void reportCurrentTime() {
-		//RestTemplate restTemplate = new RestTemplate();
-		Iterable<Localidade> mun = localidadeRepository.findAll();
-		
-		mun.forEach(m -> {
-			/*String sql = "INSERT INTO localidade (id, cod, nome) VALUES (" + m.getId() + ", " + m.getCod() + ", \""
-					+ m.getNome() + "\")";*/
+		System.out.println("Rotina de atualização iniciada às " + dateFormat.format(new Date()) + " ...");
+		String uri = "http://localhost/GADES_MASTER/";
+		Config cfg = cr.get();
+		String ultima = cfg.getUltimaAtualizacao();
+		List<Labeled> ll = auditRepository.getFlush(ultima);
+		String UploadJson = Debug.Print(ll);
+		int total = ll.size();
+		if (total == 0) {
+			System.out.println("Não existem dados novos a serem enviados.");
+		} else {
+			System.out.println("Detectadas " + total + " alterações realizadas desde a última vez em " + ultima);
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			RestTemplate restTemplate = new RestTemplate();
+			HttpEntity<String> entity = new HttpEntity<String>(UploadJson, headers);
 			try {
-				//System.out.println(sql);
-				//System.out.println(restTemplate.getForEntity("http://192.168.10.106/teste/inserteste?"+sql, String.class));
+				System.out.println("Tentando se conectar à " + uri);
+				String answer = restTemplate.postForObject(uri, entity, String.class);
+				System.out.println(answer);
+				cfg.setUltimaAtualizacao(dateFormat.format(new Date()));
+				cr.save(cfg);
+
 			} catch (RestClientException e) {
 				System.out.println(e.getMessage());
 			}
-		});
-		log.info("UPLOAD TERMINADO {}", dateFormat.format(new Date()));
+
+			log.info("Rotina de atualização terminada às {}", dateFormat.format(new Date()));
+		}
 	}
 }

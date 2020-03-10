@@ -1,6 +1,6 @@
 package com.cpd.entity.nodes;
 
-import com.cpd.entity.nodes.Localidade;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.Relationship;
 import lombok.*;
 
@@ -16,5 +16,6 @@ public abstract class Endereco extends Base {
 	
 	@EqualsAndHashCode.Exclude
 	@Relationship("SITUA_SE")
+	@JsonIgnore
 	private Localidade localidade;
 }

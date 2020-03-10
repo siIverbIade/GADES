@@ -1,9 +1,7 @@
 package com.cpd.entity.nodes;
 
 import java.util.Date;
-
-import com.cpd.entity.nodes.OrgExp;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotation.typeconversion.DateString;
 import lombok.Data;
@@ -22,5 +20,6 @@ public abstract class PessoaFisica extends Endereco {
 	private Date validade_rg;
 	
 	@Relationship("ORGAO_EXPEDITOR")
+	@JsonIgnore
 	private OrgExp org_exp_rg;
 }

@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl("/home",true)
 				.permitAll() /*AQUI ESTAMOS INFORMANDO QUE TODOS TEM ACESSO A PÁGINA DE LOGIN*/
 			.and()
-			     /*AQUI ESTAMOS INFORMANDO QUE QUANDO FOR REDIRECIONADO PARA  O LINK http://localhost:8095/logout
+			     /*AQUI ESTAMOS INFORMANDO QUE QUANDO FOR REDIRECIONADO PARA  O LINK http://localhost:8080/logout
 			      *O USUÁRIO DEVE TER SUA SESSÃO FINALIZADA E REDIRECIONADO PARA A PÁGINA DE LOGIN */
 				.logout()
 				.deleteCookies("remember-me")
@@ -69,8 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.addFilterAfter(new configurationCrsfFilter(), CsrfFilter.class)
 				.csrf()
-				.ignoringAntMatchers("/ano/**")
-				.ignoringAntMatchers("/calendarioescolar/**")
+				.ignoringAntMatchers("/testes/**")
+				.ignoringAntMatchers("/restes/**")
 				.ignoringAntMatchers("/graphql/**")
 				.ignoringAntMatchers("/gui/**")
 				.csrfTokenRepository(csrfTokenRepository());

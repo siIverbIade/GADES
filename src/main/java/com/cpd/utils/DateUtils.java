@@ -7,6 +7,10 @@ import org.joda.time.format.DateTimeFormat;
 
 public final class DateUtils {
 
+	public static DateTime now(){
+		return new DateTime(DateTimeZone.UTC);
+	}
+
 	public static DateTime getData(int ano, int dias) {
 		DateTime dtOrg = new DateTime(ano, 01, 01, 00, 00, 00, DateTimeZone.forID("GMT"));
 		DateTime dtPlusDias = dtOrg.plusDays(dias);
@@ -14,7 +18,7 @@ public final class DateUtils {
 	}
 
 	public static DateTime getString(String data){
-		return DateTime.parse(data, DateTimeFormat.forPattern("dd/MM/yyyy"));
+		return DateTime.parse(data, DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss"));
 	}
 
 	public static DateTime getData(int dia, int mes, int ano) {
